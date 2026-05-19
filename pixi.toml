@@ -1,0 +1,16 @@
+[workspace]
+authors = ["jessedabney <jesse.dabney@gmail.com>"]
+channels = ["conda-forge"]
+name = "nhl_teamNet"
+platforms = ["osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+python = ">=3.14.4,<3.15"
+requests = ">=2.34.2,<3"
+pandas = ">=3.0.3,<4"
+networkx = ">=3.6.1,<4"
+streamlit = ">=1.57.0,<2"
+plotly = ">=6.6.0,<7"
