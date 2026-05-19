@@ -112,15 +112,17 @@ def build_figure(
     node_x, node_y, node_text, node_size, node_color = [], [], [], [], []
     for node in G.nodes():
         x, y = pos[node]
-        degree = G.degree(node, weight="weight")
+        weighted_degree = G.degree(node, weight="weight")
+        team_count = G.degree(node)
         neighbors = sorted(G[node].items(), key=lambda kv: kv[1]["weight"], reverse=True)
         top_neighbors = "<br>".join(f"  {nb}: {d['weight']} players" for nb, d in neighbors[:5])
         node_x.append(x)
         node_y.append(y)
         node_text.append(
-            f"<b>{node}</b><br>Total shared: {degree}<br><br>Top connections:<br>{top_neighbors}"
+            f"<b>{node}</b><br>Connected to {team_count} teams<br>{weighted_degree} total shared players"
+            f"<br><br>Top connections:<br>{top_neighbors}"
         )
-        node_size.append(12 + degree / 18)
+        node_size.append(12 + weighted_degree / 18)
 
         if node in player_teams:
             node_color.append("#2ecc71")       # green — player's team
