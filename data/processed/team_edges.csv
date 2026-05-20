@@ -1,507 +1,528 @@
-team_a,team_b,shared_players
-ARI,UTA,13
-BUF,MIN,10
-CBJ,NSH,9
-LAK,VAN,9
-ANA,PIT,9
-BOS,BUF,9
-PIT,TOR,9
-MIN,PIT,9
-FLA,PIT,9
-CGY,VAN,9
-MIN,NSH,9
-ANA,TOR,8
-ARI,TOR,8
-FLA,VGK,8
-BUF,COL,8
-PHI,TOR,8
-ANA,PHI,8
-ANA,EDM,8
-CHI,TOR,8
-CGY,NJD,8
-CBJ,CHI,8
-CHI,DET,7
-NSH,VGK,7
-BUF,TOR,7
-BOS,MIN,7
-BOS,NJD,7
-BUF,FLA,7
-BOS,FLA,7
-ARI,CHI,7
-BOS,CGY,7
-ANA,FLA,7
-COL,WSH,7
-MIN,SJS,7
-PIT,STL,7
-NSH,TOR,7
-CGY,FLA,7
-BUF,VGK,7
-BUF,PIT,7
-CBJ,FLA,7
-BUF,WPG,7
-DET,NYR,6
-COL,NJD,6
-CAR,CBJ,6
-EDM,STL,6
-CAR,CHI,6
-BUF,CHI,6
-OTT,PIT,6
-DET,STL,6
-PIT,VAN,6
-COL,DAL,6
-LAK,WPG,6
-NSH,PIT,6
-NYR,WPG,6
-COL,TOR,6
-EDM,TOR,6
-NJD,SJS,6
-CAR,NJD,6
-CAR,TOR,6
-CHI,OTT,6
-FLA,SJS,6
-FLA,VAN,6
-FLA,NJD,6
-FLA,SEA,6
-ANA,NYR,6
-BOS,CHI,6
-BOS,CAR,6
-NSH,TBL,6
-OTT,TOR,6
-COL,NSH,6
-FLA,MTL,6
-FLA,PHI,6
-DET,EDM,6
-EDM,PIT,6
-ARI,COL,5
-BOS,PIT,5
-TBL,WPG,5
-FLA,MIN,5
-CAR,VGK,5
-NJD,PIT,5
-ANA,VAN,5
-LAK,NSH,5
-NJD,VGK,5
-BOS,VGK,5
-DAL,NYR,5
-DAL,PIT,5
-COL,MTL,5
-COL,OTT,5
-ARI,PHI,5
-OTT,VGK,5
-DET,OTT,5
-PIT,SEA,5
-ANA,WPG,5
-FLA,NSH,5
-CAR,MIN,5
-CGY,OTT,5
-VAN,WPG,5
-CAR,FLA,5
-BUF,CAR,5
-CBJ,OTT,5
-BOS,OTT,5
-BOS,CBJ,5
-CAR,CGY,5
-PIT,VGK,5
-COL,FLA,5
-CBJ,MTL,5
-CHI,FLA,5
-MIN,NYR,5
-BUF,OTT,5
-LAK,VGK,5
-CHI,VAN,5
-DAL,EDM,5
-ANA,TBL,5
-OTT,VAN,5
-LAK,TOR,5
-DAL,TOR,5
-ARI,CAR,5
-FLA,NYR,5
-SEA,WSH,5
-NSH,SEA,5
-CGY,LAK,5
-NJD,WSH,5
-NJD,SEA,5
-COL,TBL,5
-COL,PIT,5
-TOR,VAN,5
-ARI,BUF,5
-BUF,NJD,5
-CAR,PIT,5
-OTT,PHI,5
-FLA,OTT,5
-DET,PIT,5
-EDM,NJD,4
-MIN,WSH,4
-MIN,SEA,4
-CGY,TOR,4
-ANA,NJD,4
-BOS,SEA,4
-EDM,SJS,4
-NYI,VAN,4
-SJS,WPG,4
-BUF,EDM,4
-CGY,PHI,4
-ANA,MIN,4
-CHI,COL,4
-ANA,CAR,4
-CAR,PHI,4
-CHI,DAL,4
-CHI,NSH,4
-NYR,SEA,4
-CHI,MIN,4
-ARI,MTL,4
-MTL,NSH,4
-SEA,TBL,4
-CAR,WPG,4
-ANA,BOS,4
-VAN,VGK,4
-ANA,SEA,4
-SEA,SJS,4
-CHI,WSH,4
-BOS,COL,4
-SEA,WPG,4
-CBJ,WPG,4
-ARI,DAL,4
-ARI,FLA,4
-EDM,MIN,4
-DET,WSH,4
-FLA,WPG,4
-CAR,SJS,4
-MIN,PHI,4
-DET,FLA,4
-DET,WPG,4
-MTL,WPG,4
-CAR,NSH,4
-ARI,WSH,4
-WPG,WSH,4
-CGY,MTL,4
-FLA,TBL,4
-FLA,WSH,4
-DET,PHI,4
-NYR,OTT,4
-NYR,PHI,4
-DAL,MIN,4
-CGY,NSH,4
-ARI,EDM,4
-NYI,OTT,4
-NJD,WPG,4
-CBJ,COL,4
-EDM,OTT,4
-SJS,TOR,4
-DAL,MTL,4
-NSH,VAN,4
-MIN,STL,4
-PIT,UTA,4
-MIN,VGK,4
-NYR,TOR,4
-ARI,VAN,4
-BUF,TBL,4
-MIN,WPG,4
-CAR,DET,4
-CAR,NYR,4
-ANA,DET,4
-ARI,NSH,4
-NYR,STL,4
-ANA,VGK,4
-NSH,PHI,4
-MTL,PIT,4
-DAL,FLA,4
-COL,MIN,4
-CAR,COL,4
-NYR,TBL,4
-DAL,OTT,4
-STL,TOR,4
-DAL,VGK,4
-MTL,STL,4
-COL,STL,4
-PIT,SJS,4
-CBJ,MIN,4
-OTT,SJS,4
-STL,VGK,4
-CHI,NYR,4
-ANA,COL,3
-ANA,SJS,3
-ANA,OTT,3
-COL,SJS,3
-TOR,VGK,3
-DET,NJD,3
-DAL,WPG,3
-MTL,NYI,3
-DAL,SJS,3
-VAN,WSH,3
-OTT,WSH,3
-ANA,STL,3
-LAK,WSH,3
-TBL,WSH,3
-CBJ,VGK,3
-EDM,VGK,3
-ARI,MIN,3
-PHI,WSH,3
-BOS,VAN,3
-CGY,DET,3
-EDM,LAK,3
-LAK,MTL,3
-LAK,SJS,3
-LAK,OTT,3
-CHI,PHI,3
-COL,UTA,3
-CGY,WSH,3
-COL,NYI,3
-CGY,EDM,3
-NYI,WSH,3
-CAR,STL,3
-CBJ,CGY,3
-CBJ,TBL,3
-ANA,MTL,3
-CBJ,STL,3
-CHI,SEA,3
-PIT,TBL,3
-DET,TOR,3
-DAL,SEA,3
-FLA,TOR,3
-COL,DET,3
-SEA,TOR,3
-ANA,DAL,3
-CBJ,PHI,3
-CAR,DAL,3
-MIN,OTT,3
-MTL,PHI,3
-CBJ,TOR,3
-DAL,DET,3
-DAL,NJD,3
-BOS,TOR,3
-ARI,OTT,3
-EDM,PHI,3
-MTL,OTT,3
-CAR,LAK,3
-BUF,CGY,3
-SJS,VAN,3
-DAL,TBL,3
-EDM,VAN,3
-ARI,LAK,3
-DET,VAN,3
-NSH,OTT,3
-CAR,MTL,3
-EDM,MTL,3
-VGK,WSH,3
-LAK,PHI,3
-BUF,NSH,3
-MIN,TOR,3
-ANA,NYI,3
-NSH,WPG,3
-PHI,TBL,3
-NYR,VGK,3
-MIN,NJD,3
-BUF,WSH,3
-BUF,SEA,3
-BOS,WSH,3
-TOR,WSH,3
-BUF,VAN,3
-NSH,SJS,3
-LAK,NYR,3
-MTL,TBL,3
-DET,MIN,3
-CBJ,SJS,3
-ANA,NSH,3
-DAL,NSH,3
-NYI,NYR,3
-EDM,FLA,3
-STL,WSH,3
-COL,NYR,3
-DET,TBL,3
-OTT,TBL,3
-CHI,NYI,3
-PIT,WPG,3
-VGK,WPG,3
-NSH,NYR,3
-NYR,VAN,3
-BOS,DAL,3
-CHI,MTL,3
-TOR,WPG,3
-ANA,BUF,3
-CGY,COL,3
-TBL,TOR,3
-LAK,PIT,3
-ARI,CBJ,2
-CHI,LAK,2
-CAR,EDM,2
-BOS,DET,2
-SEA,VAN,2
-TOR,UTA,2
-COL,SEA,2
-CHI,EDM,2
-CAR,TBL,2
-CHI,VGK,2
-CBJ,NYI,2
-ARI,CGY,2
-MIN,NYI,2
-CBJ,NYR,2
-CAR,NYI,2
-CBJ,SEA,2
-NYR,WSH,2
-NYR,PIT,2
-BOS,NYI,2
-EDM,WSH,2
-DET,MTL,2
-CHI,PIT,2
-CHI,UTA,2
-DET,LAK,2
-LAK,UTA,2
-SJS,VGK,2
-PHI,VGK,2
-CGY,CHI,2
-SJS,TBL,2
-NJD,OTT,2
-SEA,VGK,2
-OTT,WPG,2
-NYR,SJS,2
-NJD,TBL,2
-BUF,SJS,2
-CBJ,LAK,2
-CBJ,NJD,2
-BUF,DAL,2
-ARI,VGK,2
-COL,WPG,2
-CAR,SEA,2
-TBL,UTA,2
-BOS,EDM,2
-FLA,STL,2
-CHI,TBL,2
-ANA,LAK,2
-ATL,WPG,2
-CHI,STL,2
-DET,NYI,2
-NYI,STL,2
-ATL,BUF,2
-PIT,WSH,2
-OTT,STL,2
-MTL,WSH,2
-CAR,WSH,2
-ARI,NJD,2
-BUF,MTL,2
-BUF,PHI,2
-MIN,MTL,2
-MTL,VGK,2
-ARI,PHX,2
-LAK,STL,2
-EDM,WPG,2
-ARI,TBL,2
-MTL,NJD,2
-NJD,VAN,2
-NYI,SEA,2
-BUF,UTA,2
-EDM,SEA,2
-DET,SJS,2
-EDM,NYI,2
-TBL,VAN,2
-PHI,WPG,2
-PHI,VAN,2
-NJD,NYI,2
-LAK,TBL,2
-BUF,STL,2
-ARI,WPG,2
-CBJ,DAL,2
-BOS,NSH,2
-EDM,NSH,2
-NJD,NSH,2
-BOS,WPG,2
-MIN,UTA,2
-DET,VGK,2
-MTL,VAN,2
-MIN,TBL,2
-ARI,PIT,2
-BOS,LAK,2
-CGY,WPG,2
-BOS,NYR,2
-PHI,PIT,2
-SEA,STL,2
-ANA,CBJ,2
-CGY,PIT,2
-CBJ,UTA,2
-CBJ,PIT,2
-COL,PHI,2
-ARI,NYI,2
-ARI,NYR,2
-ARI,DET,2
-NJD,UTA,2
-SJS,WSH,2
-CGY,NYR,2
-EDM,NYR,2
-CGY,VGK,2
-NJD,NYR,2
-LAK,MIN,2
-STL,TBL,2
-COL,LAK,2
-FLA,NYI,1
-BUF,DET,1
-NYI,PHI,1
-COL,VAN,1
-BOS,PHI,1
-BOS,SJS,1
-BOS,STL,1
-CGY,DAL,1
-MTL,TOR,1
-DAL,VAN,1
-CGY,UTA,1
-CHI,SJS,1
-ARI,SJS,1
-BUF,NYR,1
-MTL,SEA,1
-SJS,STL,1
-MTL,UTA,1
-CBJ,WSH,1
-DET,SEA,1
-NSH,UTA,1
-CAR,VAN,1
-UTA,WPG,1
-OTT,SEA,1
-STL,VAN,1
-CGY,NYI,1
-MIN,VAN,1
-LAK,NJD,1
-COL,EDM,1
-STL,UTA,1
-CGY,SEA,1
-CGY,MIN,1
-ANA,WSH,1
-DAL,WSH,1
-BUF,LAK,1
-ATL,MIN,1
-ATL,TBL,1
-ATL,TOR,1
-ANA,ARI,1
-PHX,VAN,1
-PHX,TOR,1
-PHI,STL,1
-ATL,VAN,1
-ATL,SJS,1
-ATL,EDM,1
-NYI,TOR,1
-NSH,STL,1
-DET,NSH,1
-CBJ,DET,1
-CGY,SJS,1
-MTL,SJS,1
-EDM,UTA,1
-CGY,TBL,1
-UTA,WSH,1
-EDM,TBL,1
-DAL,STL,1
-DET,UTA,1
-TBL,VGK,1
-NJD,TOR,1
-CHI,PHX,1
-COL,VGK,1
-BOS,MTL,1
-CAR,OTT,1
-FLA,UTA,1
-ANA,CHI,1
-NYI,WPG,1
-NSH,NYI,1
-CHI,NJD,1
-CAR,UTA,1
-ARI,BOS,1
-CBJ,VAN,1
-ANA,CGY,1
-NJD,STL,1
-BOS,TBL,1
+team_a,team_b,shared_players,shared_player_names
+ARI,UTA,14,Barrett Hayton|Ben McCartney|Clayton Keller|Connor Ingram|Dylan Guenther|Jack McBain|Karel Vejmelka|Lawson Crouse|Liam O'Brien|Matias Maccelli|Michael Carcone|Michael Kesselring|Nick Bjugstad|Nick Schmaltz
+MIN,PIT,11,Connor Dewar|Dmitry Kulikov|Frederick Gaudreau|Ian Cole|Jason Zucker|Jeff Petry|Justin Brazeau|Mikael Granlund|Nick Bjugstad|Oskar Sundqvist|Ryan Reaves
+MIN,NSH,11,Erik Haula|Frederick Gaudreau|Gustav Nyquist|Kevin Fiala|Luke Kunin|Michael McCarron|Mikael Granlund|Nino Niederreiter|Ryan Hartman|Tyson Jost|Yakov Trenin
+BUF,MIN,10,Alex Tuch|Dmitry Kulikov|Jason Zucker|Jordan Greenway|Marcus Foligno|Marcus Johansson|Nicolas Deslauriers|Tyson Jost|Vinnie Hinostroza|Zach Bogosian
+DET,STL,10,David Perron|Jake Walman|Jonatan Berggren|Justin Faulk|Justin Holl|Nick Leddy|Oskar Sundqvist|Pius Suter|Robby Fabbri|Ville Husso
+ANA,PIT,10,Andrew Agozzino|Danton Heinen|David Perron|Dmitry Kulikov|Erik Gudbranson|Marcus Pettersson|Mikael Granlund|Rickard Rakell|Ryan Poehling|Stefan Noesen
+BUF,WPG,10,Colin Miller|Dmitry Kulikov|Eric Comrie|Evander Kane|Jacob Bryson|Joel Armia|Logan Stanley|Luke Schenn|Tyler Myers|Zach Bogosian
+CBJ,FLA,9,Alexander Wennberg|Anthony Duclair|Daniil Tarasov|Erik Gudbranson|Jonathan Marchessault|Luke Kunin|Mason Marchment|Sergei Bobrovsky|Seth Jones
+LAK,OTT,9,Anton Forsberg|Arthur Kaliyev|Cody Ceci|Jordan Spence|Kurtis MacDermid|Mathieu Joseph|Michael Amadio|Warren Foegele|Zack MacEwen
+BOS,BUF,9,Casey Mittelstadt|Colin Miller|Connor Clifton|Curtis Lazar|Henri Jokiharju|Linus Ullmark|Marcus Johansson|Nikita Zadorov|Taylor Hall
+PIT,TOR,9,Cody Ceci|Connor Dewar|Kasperi Kapanen|Matt Murray|Michael Bunting|Noel Acciari|Ryan Reaves|Sam Lafferty|Stefan Noesen
+CGY,VAN,9,Andrei Kuzmenko|Chris Tanev|Curtis Lazar|Derek Forbort|Erik Gudbranson|Jacob Markstrom|Travis Hamonic|Troy Stecher|Tyler Toffoli
+CBJ,NSH,9,Dante Fabbro|Erik Gudbranson|Gustav Nyquist|Jonathan Marchessault|Luke Kunin|Mathieu Olivier|Matt Duchene|Nick Blankenburg|Seth Jones
+FLA,VGK,9,Cole Schwindt|Erik Haula|Evgenii Dadonov|Jaycob Megna|Jonathan Marchessault|Nate Schmidt|Nick Cousins|Reilly Smith|Tomas Nosek
+BUF,TOR,9,Conor Timmins|Ilya Lyubushkin|Jake McCabe|James Reimer|Luke Schenn|Ryan O'Reilly|Sam Carrick|Sam Lafferty|Zach Bogosian
+NSH,VGK,9,Cody Glass|Cole Smith|Colton Sissons|Erik Haula|Jeremy Davies|Jeremy Lauzon|Jonathan Marchessault|Nick Cousins|Nicolas Hague
+PHI,TOR,9,Anthony Stolarz|Calvin Pickard|James van Riemsdyk|Luke Schenn|Nicolas Aube-Kubel|Nikita Grebenkin|Petr Mrazek|Philippe Myers|Scott Laughton
+LAK,VAN,9,Andrei Kuzmenko|Ben Hutton|Derek Forbort|Luke Schenn|Nic Dowd|Tanner Pearson|Troy Stecher|Tyler Toffoli|Zack MacEwen
+FLA,PIT,9,Dmitry Kulikov|Erik Gudbranson|Evan Rodrigues|Garrett Wilson|Jared McCann|Mike Matheson|Nick Bjugstad|Noel Acciari|Reilly Smith
+MIN,SJS,9,Brent Burns|Gustav Nyquist|Jake Middleton|John Klingberg|Luke Kunin|Mikael Granlund|Nico Sturm|Ryan Donato|Ryan Reaves
+BUF,VGK,9,Alex Tuch|Brayden McNabb|Colin Miller|Jack Eichel|Jeremy Davies|Peyton Krebs|Tanner Pearson|Victor Olofsson|William Carrier
+ANA,TOR,9,Anthony Stolarz|Ben Hutton|Bo Groulx|Frederik Andersen|Luke Schenn|Petr Mrazek|Sam Carrick|Simon Benoit|Stefan Noesen
+ARI,TOR,9,Calvin Pickard|Conor Timmins|Ilya Lyubushkin|Luke Schenn|Matias Maccelli|Max Domi|Michael Bunting|Oliver Ekman-Larsson|Troy Stecher
+CHI,TOR,8,Colin Blackwell|David Kampf|Ilya Mikheyev|Jake McCabe|Max Domi|Nick Foligno|Petr Mrazek|Sam Lafferty
+BOS,MIN,8,Charlie Coyle|Erik Haula|Justin Brazeau|Marat Khusnutdinov|Marcus Johansson|Mike Reilly|Nick Foligno|Ryan Donato
+CBJ,CHI,8,Adam Boqvist|Anthony Duclair|Anton Forsberg|Artemi Panarin|Brandon Saad|Max Domi|Nick Foligno|Seth Jones
+BOS,CGY,8,Curtis Lazar|Dan Vladar|Derek Forbort|Dougie Hamilton|Elias Lindholm|Garnet Hathaway|John Beecher|Nikita Zadorov
+BUF,FLA,8,Alex Lyon|Brandon Montour|Dmitry Kulikov|Evan Rodrigues|James Reimer|Jonas Johansson|Sam Reinhart|Vinnie Hinostroza
+FLA,OTT,8,Anthony Duclair|Claude Giroux|Cole Reinhardt|Donovan Sebrango|Erik Gudbranson|Evgenii Dadonov|James Reimer|Nick Cousins
+BUF,COL,8,Bowen Byram|Casey Mittelstadt|Conor Timmins|Evan Rodrigues|Jonas Johansson|Nikita Zadorov|Ryan O'Reilly|Tyson Jost
+PIT,VAN,8,Arturs Silovs|Drew O'Connor|Erik Gudbranson|Jared McCann|Marcus Pettersson|Pierre-Olivier Joseph|Tanner Pearson|Teddy Blueger
+COL,NSH,8,Justin Barron|Justus Annunen|Kiefer Sherwood|Matt Duchene|Nick Blankenburg|Ryan O'Reilly|Samuel Girard|Tyson Jost
+EDM,PIT,8,Cody Ceci|David Perron|Dmitry Kulikov|Jeff Petry|Kasperi Kapanen|Nick Bjugstad|Stuart Skinner|Tristan Jarry
+FLA,PHI,8,Alex Lyon|Claude Giroux|Garrett Wilson|Nick Cousins|Noah Juulsen|Owen Tippett|Radko Gudas|Sergei Bobrovsky
+ANA,SJS,8,Andrew Agozzino|Jaycob Megna|Jeffrey Viel|John Klingberg|Kiefer Sherwood|Mikael Granlund|Pavol Regenda|Stefan Noesen
+BUF,PIT,8,Connor Clifton|Conor Sheary|Dmitry Kulikov|Evan Rodrigues|Jason Zucker|Mark Jankowski|Sam Lafferty|Tanner Pearson
+BOS,CHI,8,Henri Jokiharju|Lukas Reichel|Matt Grzelcyk|Nick Foligno|Nikita Zadorov|Ryan Donato|Taylor Hall|Tyler Bertuzzi
+BOS,CAR,8,Brandon Bussi|Dmitry Orlov|Dougie Hamilton|Elias Lindholm|Erik Haula|Mike Reilly|Morgan Geekie|Taylor Hall
+ANA,PHI,8,Anthony Stolarz|Jamie Drysdale|Luke Schenn|Nicolas Deslauriers|Petr Mrazek|Radko Gudas|Ryan Poehling|Trevor Zegras
+LAK,TOR,8,Ben Hutton|Cody Ceci|David Rittich|Luke Schenn|Michael Amadio|Scott Laughton|Trevor Moore|Troy Stecher
+FLA,NJD,8,A.J. Greer|Dmitry Kulikov|Erik Haula|Evgenii Dadonov|Jacob Markstrom|Jesper Boqvist|Nick Bjugstad|Vitek Vanecek
+ANA,EDM,8,Adam Henrique|Anthony Stolarz|Corey Perry|David Perron|Dmitry Kulikov|John Klingberg|Max Jones|Ryan Strome
+CGY,NJD,8,Blake Coleman|Curtis Lazar|Dougie Hamilton|Jacob Markstrom|Kevin Bahl|Kevin Rooney|Nick DeSimone|Yegor Sharangovich
+BOS,FLA,7,A.J. Greer|Brad Marchand|Erik Haula|Frank Vatrano|Noel Acciari|Reilly Smith|Tomas Nosek
+NSH,TOR,7,Calle Jarnkrok|Colin Blackwell|David Rittich|Luke Schenn|Michael Bunting|Philippe Myers|Ryan O'Reilly
+COL,OTT,7,Andrew Agozzino|Dennis Gilbert|Kurtis MacDermid|Lars Eller|Matt Duchene|Parker Kelly|Vladislav Namestnikov
+BOS,CBJ,7,Andrew Peeke|Charlie Coyle|Danton Heinen|Joonas Korpisalo|Jordan Harris|Nick Foligno|Sean Kuraly
+DET,PIT,7,Alex Nedeljkovic|Anthony Mantha|David Perron|Elmer Soderblom|Jeff Petry|Olli Määttä|Oskar Sundqvist
+CGY,FLA,7,Erik Gudbranson|Jacob Markstrom|Jonathan Huberdeau|MacKenzie Weegar|Matthew Tkachuk|Ryan Lomberg|Sam Bennett
+TOR,VAN,7,Ben Hutton|Chris Tanev|Dakota Joshua|Ilya Mikheyev|Luke Schenn|Oliver Ekman-Larsson|Troy Stecher
+ANA,FLA,7,Brandon Montour|Dmitry Kulikov|Erik Gudbranson|Frank Vatrano|Jaycob Megna|Joshua Mahura|Radko Gudas
+CAR,MIN,7,Brent Burns|Erik Haula|Ian Cole|Mike Reilly|Nicolas Deslauriers|Nino Niederreiter|Tyson Jost
+COL,WSH,7,Andre Burakovsky|Darcy Kuemper|Lars Eller|Liam O'Brien|Nicolas Aube-Kubel|Philipp Grubauer|Semyon Varlamov
+DET,OTT,7,Alex DeBrincat|Cam Talbot|David Perron|Jacob Bernard-Docker|Nick Jensen|Travis Hamonic|Vladislav Namestnikov
+LAK,WPG,7,Alex Iafallo|David Rittich|Derek Forbort|Gabriel Vilardi|Jeff Malott|Joel Armia|Luke Schenn
+CAR,CBJ,7,Anton Forsberg|Brendan Smith|Eric Robinson|Ian Cole|Jack Roslovic|Jake Bean|Max Domi
+FLA,MIN,7,Dmitry Kulikov|Erik Haula|Luke Kunin|Matt Kiersted|Nick Bjugstad|Nico Sturm|Vinnie Hinostroza
+BOS,PIT,7,Connor Clifton|Danton Heinen|Justin Brazeau|Matt Grzelcyk|Noel Acciari|Parker Wotherspoon|Reilly Smith
+FLA,SJS,7,Alexander Wennberg|James Reimer|Jaycob Megna|Jonah Gadjovich|Luke Kunin|Nico Sturm|Vitek Vanecek
+MTL,STL,7,Alexandre Texier|Charlie Lindgren|Jake Allen|Joel Edmundson|Jonathan Drouin|Lars Eller|Zachary Bolduc
+BUF,CAR,7,Alex Lyon|James Reimer|Mark Jankowski|Nicolas Deslauriers|Taylor Hall|Tyson Jost|William Carrier
+NSH,PIT,7,Erik Gudbranson|Frederick Gaudreau|Mark Jankowski|Michael Bunting|Mikael Granlund|Samuel Girard|Tommy Novak
+EDM,NJD,7,Adam Henrique|Adam Larsson|Connor Brown|Curtis Lazar|Dmitry Kulikov|Nick Bjugstad|Taylor Hall
+BOS,NJD,7,A.J. Greer|Curtis Lazar|Dougie Hamilton|Erik Haula|Marcus Johansson|Pavel Zacha|Taylor Hall
+CHI,DET,7,Alex DeBrincat|Nick Leddy|Olli Määttä|Patrick Kane|Petr Mrazek|Pius Suter|Tyler Bertuzzi
+OTT,PIT,7,Andrew Agozzino|Cody Ceci|David Perron|Erik Gudbranson|Erik Karlsson|Lars Eller|Matt Murray
+OTT,TOR,7,Cody Ceci|Connor Brown|James Reimer|Matt Murray|Michael Amadio|Nick Foligno|Scott Sabourin
+ARI,CHI,7,Anthony Duclair|Connor Murphy|Dylan Strome|Max Domi|Nick Schmaltz|Taylor Hall|Vinnie Hinostroza
+PIT,STL,7,David Perron|Ian Cole|Kasperi Kapanen|Lars Eller|Noel Acciari|Oskar Sundqvist|Ryan Reaves
+EDM,TOR,7,Anthony Stolarz|Calvin Pickard|Cody Ceci|Connor Brown|Kasperi Kapanen|Troy Stecher|Zach Hyman
+NSH,TBL,7,Jonathan Marchessault|Luke Schenn|Nick Perbix|Philippe Myers|Ryan McDonagh|Steven Stamkos|Tanner Jeannot
+NJD,PIT,6,Brian Dumoulin|Dmitry Kulikov|John Marino|Nick Bjugstad|Ryan Graves|Stefan Noesen
+ANA,MIN,6,Dmitry Kulikov|John Klingberg|Mikael Granlund|Nicolas Deslauriers|Robby Fabbri|Sam Steel
+ANA,NYR,6,Chris Kreider|Frank Vatrano|Jacob Trouba|Ryan Strome|Sam Carrick|Urho Vaakanainen
+DET,PHI,6,Alex Lyon|Calvin Pickard|Cam Talbot|James van Riemsdyk|Luke Glendening|Petr Mrazek
+FLA,MTL,6,Ben Chiarot|Evgenii Dadonov|Mike Matheson|Nick Cousins|Noah Juulsen|Samuel Montembeault
+PIT,UTA,6,Andrew Agozzino|Brandon Tanev|Ian Cole|John Marino|Nick Bjugstad|Olli Määttä
+TBL,WPG,6,Cole Koepke|Haydn Fleury|Luke Schenn|Michael Eyssimont|Vladislav Namestnikov|Zach Bogosian
+DET,WPG,6,Andrew Copp|Ben Chiarot|Eric Comrie|Gustav Nyquist|Mason Appleton|Vladislav Namestnikov
+NYR,TBL,6,Barclay Goodrow|Conor Sheary|J.T. Miller|Ryan McDonagh|Taylor Raddysh|Vladislav Namestnikov
+CAR,NJD,6,Brendan Smith|Brett Pesce|Dougie Hamilton|Erik Haula|Stefan Noesen|Taylor Hall
+DAL,PIT,6,Casey DeSmith|Cody Ceci|Jamie Oleksiak|Michael Bunting|Mikael Granlund|Reilly Smith
+COL,MTL,6,Alex Newhook|Artturi Lehkonen|Brett Kulak|Jonathan Drouin|Justin Barron|Lars Eller
+NJD,OTT,6,Connor Brown|Curtis Lazar|Evgenii Dadonov|Fabian Zetterlund|Kurtis MacDermid|Zack MacEwen
+COL,DAL,6,Joel Kiviranta|Matt Duchene|Mikko Rantanen|Scott Wedgewood|Valeri Nichushkin|Vladislav Namestnikov
+COL,TOR,6,Alexander Kerfoot|Calvin Pickard|Conor Timmins|Nazem Kadri|Nicolas Aube-Kubel|Ryan O'Reilly
+NJD,VGK,6,Akira Schmid|Alexander Holtz|Cody Glass|Erik Haula|Evgenii Dadonov|Paul Cotter
+EDM,STL,6,David Perron|Dylan Holloway|Jake Walman|Kasperi Kapanen|Nathan Walker|Philip Broberg
+DET,NYR,6,Andrew Copp|Brendan Smith|Cam Talbot|Dylan McIlrath|Patrick Kane|Vladislav Namestnikov
+FLA,VAN,6,Erik Gudbranson|Jacob Markstrom|Jared McCann|Jonah Gadjovich|Nate Schmidt|Noah Juulsen
+NJD,WSH,6,Brenden Dillon|Connor Brown|Dennis Cholowski|Jonas Siegenthaler|Marcus Johansson|Vitek Vanecek
+EDM,OTT,6,Cam Talbot|Cody Ceci|Connor Brown|Curtis Lazar|David Perron|Warren Foegele
+CAR,COL,6,Brent Burns|Ian Cole|Jack Drury|Martin Necas|Nicolas Roy|Tyson Jost
+ARI,BUF,6,Conor Timmins|Ilya Lyubushkin|Luke Schenn|Michael Kesselring|Taylor Hall|Vinnie Hinostroza
+OTT,SJS,6,Adam Gaudette|Andrew Agozzino|Dylan DeMelo|Erik Karlsson|Fabian Zetterlund|James Reimer
+DAL,TOR,6,Cody Ceci|Colin Blackwell|Ilya Lyubushkin|Mason Marchment|Max Domi|Michael Bunting
+ARI,EDM,6,Calvin Pickard|Connor Ingram|Connor Murphy|Nick Bjugstad|Taylor Hall|Troy Stecher
+CGY,LAK,6,Andrei Kuzmenko|David Rittich|Derek Forbort|Olli Määttä|Troy Stecher|Tyler Toffoli
+LAK,VGK,6,Ben Hutton|Brayden McNabb|Jonathan Quick|Michael Amadio|Nic Dowd|Tanner Pearson
+CAR,TOR,6,Frederik Andersen|James Reimer|Max Domi|Petr Mrazek|Stefan Noesen|Steven Lorentz
+CHI,OTT,6,Adam Gaudette|Alex DeBrincat|Anthony Duclair|Anton Forsberg|Dennis Gilbert|Nick Foligno
+CHI,FLA,6,Anthony Duclair|Dominic Toninato|Gustav Forsling|Seth Jones|Spencer Knight|Vinnie Hinostroza
+NYR,WPG,6,Andrew Copp|Jacob Trouba|Kevin Hayes|Morgan Barron|Neal Pionk|Vladislav Namestnikov
+DET,EDM,6,Calvin Pickard|Cam Talbot|David Perron|Jake Walman|Jeff Petry|Troy Stecher
+MIN,NYR,6,Cam Talbot|Carson Soucy|Mats Zuccarello|Nicolas Aube-Kubel|Ryan Reaves|Vladimir Tarasenko
+CBJ,MTL,6,Alexandre Texier|Jordan Harris|Josh Anderson|Max Domi|Patrik Laine|Sean Monahan
+NYR,SEA,6,Carson Soucy|Colin Blackwell|Kaapo Kakko|Ryan Lindgren|Tye Kartye|Will Borgen
+FLA,SEA,6,Alexander Wennberg|Brandon Montour|Jared McCann|Jaycob Megna|Joshua Mahura|Mason Marchment
+DAL,EDM,6,Alexander Petrovic|Cody Ceci|Corey Perry|Jason Dickinson|John Klingberg|Mattias Janmark
+NJD,SJS,6,Brenden Dillon|Fabian Zetterlund|Mackenzie Blackwood|Stefan Noesen|Timo Meier|Vitek Vanecek
+CHI,WSH,6,Andre Burakovsky|Andrew Mangiapane|David Kampf|Dylan Strome|Taylor Raddysh|Trevor van Riemsdyk
+MIN,PHI,6,Bobby Brink|Cam Talbot|Nick Seeler|Nicolas Aube-Kubel|Nicolas Deslauriers|Ryan Hartman
+PIT,SEA,6,Brandon Tanev|Brian Dumoulin|Frederick Gaudreau|Jamie Oleksiak|Jared McCann|Matt Murray
+COL,PIT,6,Andrew Agozzino|Evan Rodrigues|Ian Cole|Lars Eller|Ryan Graves|Samuel Girard
+ARI,PHI,6,Calvin Pickard|Christian Dvorak|Luke Schenn|Nick Cousins|Shayne Gostisbehere|Tony DeAngelo
+CAR,SJS,6,Alex Nedeljkovic|Brent Burns|Dmitry Orlov|James Reimer|Stefan Noesen|Steven Lorentz
+PIT,SJS,6,Alex Nedeljkovic|Andrew Agozzino|Erik Karlsson|Mikael Granlund|Ryan Reaves|Stefan Noesen
+COL,MIN,6,Brent Burns|Darcy Kuemper|Ian Cole|Nico Sturm|Nicolas Aube-Kubel|Tyson Jost
+ARI,DAL,6,Ilya Lyubushkin|Joel Hanley|Kyle Capobianco|Max Domi|Michael Bunting|Scott Wedgewood
+COL,NJD,6,A.J. Greer|Kurtis MacDermid|Mackenzie Blackwood|Miles Wood|Ryan Graves|Scott Wedgewood
+FLA,NSH,6,Erik Gudbranson|Erik Haula|Jonathan Marchessault|Luke Kunin|Nick Cousins|Seth Jones
+CAR,CHI,6,Anton Forsberg|Max Domi|Petr Mrazek|Taylor Hall|Teuvo Teravainen|Trevor van Riemsdyk
+BUF,CHI,6,Henri Jokiharju|Jake McCabe|Nikita Zadorov|Sam Lafferty|Taylor Hall|Vinnie Hinostroza
+STL,TOR,6,Dakota Joshua|Justin Holl|Kasperi Kapanen|Noel Acciari|Ryan O'Reilly|Ryan Reaves
+BUF,OTT,6,Curtis Lazar|Dylan Cozens|Jacob Bernard-Docker|James Reimer|Josh Norris|Linus Ullmark
+NYI,VAN,5,Aatu Räty|Anthony Beauvillier|Bo Horvat|Carson Soucy|Travis Hamonic
+CGY,DET,5,Anthony Mantha|Cam Talbot|Olli Määttä|Travis Hamonic|Troy Stecher
+CGY,OTT,5,Cam Talbot|Curtis Lazar|Dennis Gilbert|Erik Gudbranson|Travis Hamonic
+BOS,VGK,5,Colin Miller|Erik Haula|Jeremy Lauzon|Reilly Smith|Tomas Nosek
+CHI,COL,5,Andre Burakovsky|Brandon Saad|Dennis Gilbert|Dominic Toninato|Nikita Zadorov
+CAR,CGY,5,Dougie Hamilton|Elias Lindholm|Jake Bean|Mark Jankowski|Noah Hanifin
+DAL,WPG,5,Brenden Dillon|Colin Miller|Kyle Capobianco|Tyler Myers|Vladislav Namestnikov
+CAR,WPG,5,Dylan Coghlan|Haydn Fleury|Jack Roslovic|Nikolaj Ehlers|Nino Niederreiter
+VAN,WPG,5,Derek Forbort|Evander Kane|Luke Schenn|Nate Schmidt|Tyler Myers
+COL,FLA,5,A.J. Greer|Dominic Toninato|Evan Rodrigues|Jonas Johansson|Nico Sturm
+TOR,WSH,5,Connor Brown|David Kampf|Nicolas Aube-Kubel|Rasmus Sandin|Timothy Liljegren
+MIN,VAN,5,Carson Soucy|Liam Ohgren|Marco Rossi|Quinn Hughes|Zeev Buium
+CHI,VAN,5,Adam Gaudette|Ilya Mikheyev|Jason Dickinson|Kevin Lankinen|Pius Suter
+LAK,PHI,5,Brayden Schenn|Carl Grundstrom|Luke Schenn|Scott Laughton|Zack MacEwen
+LAK,NSH,5,David Rittich|Kevin Fiala|Luke Schenn|Tanner Jeannot|Viktor Arvidsson
+BUF,VAN,5,Curtis Lazar|Evander Kane|Luke Schenn|Tanner Pearson|Tyler Myers
+CGY,VGK,5,Brayden Pachal|Noah Hanifin|Rasmus Andersson|Victor Olofsson|Zach Whitecloud
+BUF,NSH,5,Jeremy Davies|Luke Schenn|Mark Jankowski|Ryan O'Reilly|Tyson Jost
+OTT,VAN,5,Adam Gaudette|Curtis Lazar|Erik Gudbranson|Travis Hamonic|Zack MacEwen
+CGY,PIT,5,Anthony Mantha|Erik Gudbranson|Ilya Solovyov|Mark Jankowski|Olli Määttä
+NYR,WSH,5,Conor Sheary|Dylan McIlrath|Nicolas Aube-Kubel|Taylor Raddysh|Vincent Iorio
+CGY,PHI,5,Cam Talbot|Dan Vladar|Garnet Hathaway|Joel Farabee|Morgan Frost
+CAR,MTL,5,Jesperi Kotkaniemi|Joel Edmundson|Max Domi|Mike Reilly|Nicolas Deslauriers
+CAR,PHI,5,Alex Lyon|Nicolas Deslauriers|Petr Mrazek|Shayne Gostisbehere|Tony DeAngelo
+MTL,PHI,5,Christian Dvorak|Nick Cousins|Nicolas Deslauriers|Noah Juulsen|Ryan Poehling
+CAR,NSH,5,Brady Skjei|Erik Haula|Mark Jankowski|Nino Niederreiter|Tyson Jost
+CAR,VGK,5,Dylan Coghlan|Erik Haula|Nicolas Roy|Noah Hanifin|William Carrier
+ARI,COL,5,Calvin Pickard|Conor Timmins|Darcy Kuemper|Liam O'Brien|Scott Wedgewood
+VAN,VGK,5,Ben Hutton|Nate Schmidt|Nic Dowd|Tanner Pearson|Teddy Blueger
+CGY,TOR,5,Calle Jarnkrok|Chris Tanev|David Rittich|Nazem Kadri|Troy Stecher
+SJS,VAN,5,Adam Gaudette|Evander Kane|Jonah Gadjovich|Kiefer Sherwood|Tyler Toffoli
+EDM,VAN,5,Curtis Lazar|Evander Kane|Jason Dickinson|Troy Stecher|Vasily Podkolzin
+BUF,EDM,5,Curtis Lazar|Dmitry Kulikov|Evander Kane|Ryan McLeod|Taylor Hall
+FLA,WSH,5,Dylan McIlrath|Justin Sourdif|Nate Schmidt|Radko Gudas|Vitek Vanecek
+CGY,EDM,5,Brett Kulak|Cam Talbot|Curtis Lazar|Ryan Strome|Troy Stecher
+NYR,OTT,5,Anthony Duclair|Arthur Kaliyev|Cam Talbot|Mika Zibanejad|Vladislav Namestnikov
+FLA,NYR,5,Anthony Duclair|Dylan McIlrath|Frank Vatrano|Niko Mikkola|Vincent Trocheck
+SEA,WSH,5,Andre Burakovsky|Chandler Stephenson|Dennis Cholowski|Marcus Johansson|Philipp Grubauer
+NSH,SEA,5,Calle Jarnkrok|Colin Blackwell|Eeli Tolvanen|Frederick Gaudreau|Jeremy Lauzon
+NJD,SEA,5,Adam Larsson|Brian Dumoulin|Dennis Cholowski|Marcus Johansson|Nathan Bastian
+MIN,WSH,5,Brandon Duhaime|Darcy Kuemper|Declan Chisholm|Marcus Johansson|Nicolas Aube-Kubel
+SEA,TOR,5,Bobby McMann|Calle Jarnkrok|Colin Blackwell|Mason Marchment|Matt Murray
+BUF,NJD,5,Curtis Lazar|Dmitry Kulikov|Eric Comrie|Marcus Johansson|Taylor Hall
+BOS,SEA,5,Jeremy Lauzon|Marcus Johansson|Michael Eyssimont|Morgan Geekie|Ryan Donato
+NJD,UTA,5,John Marino|Kevin Rooney|Nick Bjugstad|Nick DeSimone|Vitek Vanecek
+SJS,WPG,5,Brenden Dillon|Dylan DeMelo|Evander Kane|Gustav Nyquist|Michael Eyssimont
+NSH,SJS,5,Gustav Nyquist|Kiefer Sherwood|Luke Kunin|Mikael Granlund|Yaroslav Askarov
+LAK,PIT,5,Blake Lizotte|Brian Dumoulin|Cody Ceci|Olli Määttä|Tanner Pearson
+ARI,CAR,5,Jordan Martinook|Max Domi|Shayne Gostisbehere|Taylor Hall|Tony DeAngelo
+CBJ,WPG,5,Gustav Nyquist|Jack Roslovic|Kevin Stenlund|Patrik Laine|Pierre-Luc Dubois
+ANA,CAR,5,Frederik Andersen|Haydn Fleury|Nicolas Deslauriers|Petr Mrazek|Stefan Noesen
+EDM,SJS,5,Evander Kane|Jake Walman|John Klingberg|Ty Emberson|Vincent Desharnais
+DET,MIN,5,Cam Talbot|Gustav Nyquist|Jeff Petry|Oskar Sundqvist|Robby Fabbri
+MIN,STL,5,Ian Cole|Oskar Sundqvist|Robby Fabbri|Ryan Reaves|Vladimir Tarasenko
+PIT,VGK,5,David Perron|Reilly Smith|Ryan Reaves|Tanner Pearson|Teddy Blueger
+SJS,TOR,5,James Reimer|Ryan Reaves|Stefan Noesen|Steven Lorentz|Timothy Liljegren
+BOS,OTT,5,Curtis Lazar|Linus Ullmark|Mark Kastelic|Mike Reilly|Nick Foligno
+CAR,NYR,5,Brady Skjei|Brendan Smith|K'Andre Miller|Tony DeAngelo|Vincent Trocheck
+CBJ,MIN,5,Charlie Coyle|Gustav Nyquist|Ian Cole|Luke Kunin|Nick Foligno
+CBJ,OTT,5,Anthony Duclair|Anton Forsberg|Erik Gudbranson|Matt Duchene|Nick Foligno
+CHI,MIN,5,Nick Foligno|Nick Seeler|Ryan Donato|Ryan Hartman|Vinnie Hinostroza
+CHI,NYR,5,Anthony Duclair|Artemi Panarin|Colin Blackwell|Patrick Kane|Taylor Raddysh
+OTT,VGK,5,David Perron|Evgenii Dadonov|Mark Stone|Michael Amadio|Nick Cousins
+MIN,OTT,5,Cam Talbot|Cameron Crotty|Filip Gustavsson|Mike Reilly|Nick Foligno
+CAR,FLA,5,Alex Lyon|Eetu Luostarinen|Erik Haula|James Reimer|Vincent Trocheck
+ANA,VGK,5,Ben Hutton|David Perron|Jaycob Megna|Shea Theodore|William Karlsson
+EDM,MIN,5,Cam Talbot|Dmitry Kulikov|Jeff Petry|John Klingberg|Nick Bjugstad
+ANA,DET,5,David Perron|John Gibson|Petr Mrazek|Robby Fabbri|Ville Husso
+OTT,PHI,5,Cam Talbot|Claude Giroux|Hayden Hodgson|Nick Cousins|Zack MacEwen
+DAL,NYR,5,Brendan Smith|Colin Blackwell|Mats Zuccarello|Nils Lundkvist|Vladislav Namestnikov
+CAR,PIT,5,Alex Nedeljkovic|Ian Cole|Jordan Staal|Mark Jankowski|Stefan Noesen
+DAL,NJD,5,Brendan Smith|Brenden Dillon|Evgenii Dadonov|Nathan Bastian|Scott Wedgewood
+CBJ,COL,5,Brandon Saad|Ian Cole|Matt Duchene|Miles Wood|Nick Blankenburg
+COL,STL,5,Brandon Saad|Ian Cole|Jonathan Drouin|Lars Eller|Ryan O'Reilly
+COL,TBL,5,Ian Cole|Jonas Johansson|Jonathan Drouin|Ross Colton|Vladislav Namestnikov
+CBJ,PHI,5,David Jiricek|Egor Zamula|Ivan Provorov|James van Riemsdyk|Sergei Bobrovsky
+DET,TOR,5,Calvin Pickard|James van Riemsdyk|Justin Holl|Petr Mrazek|Troy Stecher
+MIN,TOR,5,Connor Dewar|Nick Foligno|Nicolas Aube-Kubel|Ryan Reaves|Zach Bogosian
+CAR,DET,5,Alex Lyon|Alex Nedeljkovic|Brendan Smith|Justin Faulk|Petr Mrazek
+MIN,WPG,5,Declan Chisholm|Dmitry Kulikov|Gustav Nyquist|Nino Niederreiter|Zach Bogosian
+ANA,BUF,5,Brandon Montour|Dmitry Kulikov|Luke Schenn|Nicolas Deslauriers|Sam Carrick
+ANA,TBL,5,Alex Killorn|Corey Perry|Haydn Fleury|Luke Schenn|Radko Gudas
+LAK,NYR,5,Artemi Panarin|Arthur Kaliyev|Jonathan Quick|Jonny Brodzinski|Vladislav Gavrikov
+BUF,TBL,5,Conor Sheary|Jonas Johansson|Luke Schenn|Zach Bogosian|Zemgus Girgensons
+ANA,VAN,5,Ben Hutton|Erik Gudbranson|Kiefer Sherwood|Luke Schenn|Marcus Pettersson
+TBL,TOR,5,Luke Schenn|Philippe Myers|Pontus Holmberg|Scott Sabourin|Zach Bogosian
+ANA,WPG,5,Dmitry Kulikov|Haydn Fleury|Jacob Trouba|Jansen Harkins|Luke Schenn
+COL,SJS,5,Andrew Agozzino|Brent Burns|Kiefer Sherwood|Mackenzie Blackwood|Nico Sturm
+NYR,PHI,4,Cam Talbot|Kevin Hayes|Nicolas Aube-Kubel|Tony DeAngelo
+ANA,SEA,4,Brandon Montour|Haydn Fleury|Jaycob Megna|Joshua Mahura
+MIN,MTL,4,Jeff Petry|Michael McCarron|Mike Reilly|Nicolas Deslauriers
+VGK,WSH,4,Chandler Stephenson|Logan Thompson|Nate Schmidt|Nic Dowd
+MTL,PIT,4,Jeff Petry|Lars Eller|Mike Matheson|Ryan Poehling
+FLA,TBL,4,Carter Verhaeghe|Jonas Johansson|Jonathan Marchessault|Radko Gudas
+DAL,TBL,4,Adam Erne|Corey Perry|Luke Glendening|Vladislav Namestnikov
+DAL,MTL,4,Corey Perry|Evgenii Dadonov|Joel Hanley|Max Domi
+WPG,WSH,4,Brenden Dillon|Declan Chisholm|Nate Schmidt|Pierre-Luc Dubois
+SEA,SJS,4,Alexander Wennberg|Jaycob Megna|Michael Eyssimont|Ryan Donato
+DAL,SJS,4,Brenden Dillon|John Klingberg|Mikael Granlund|Ty Dellandrea
+ARI,MTL,4,Christian Dvorak|Joel Hanley|Max Domi|Nick Cousins
+ARI,WSH,4,Darcy Kuemper|Dylan Strome|Jakob Chychrun|Liam O'Brien
+DET,WSH,4,Anthony Mantha|Dennis Cholowski|Dylan McIlrath|Nick Jensen
+CGY,NSH,4,Calle Jarnkrok|David Rittich|Erik Gudbranson|Mark Jankowski
+BOS,NSH,4,Erik Haula|Jeremy Lauzon|Tanner Jeannot|Viktor Arvidsson
+MTL,WPG,4,Ben Chiarot|Joel Armia|Johnathan Kovacevic|Patrik Laine
+DET,FLA,4,Alex Lyon|Ben Chiarot|Dylan McIlrath|Tomas Nosek
+ANA,DAL,4,Corey Perry|John Klingberg|Mikael Granlund|Sam Steel
+CBJ,PIT,4,Danton Heinen|Egor Chinakhov|Erik Gudbranson|Ian Cole
+EDM,NSH,4,Connor Ingram|Mattias Ekholm|Spencer Stastney|Viktor Arvidsson
+BOS,COL,4,A.J. Greer|Casey Mittelstadt|Jack Ahcan|Nikita Zadorov
+SEA,WPG,4,Brandon Tanev|Haydn Fleury|Mason Appleton|Michael Eyssimont
+SJS,WSH,4,Brenden Dillon|Dmitry Orlov|Timothy Liljegren|Vitek Vanecek
+COL,UTA,4,Alexander Kerfoot|Andrew Agozzino|Ian Cole|Liam O'Brien
+CHI,SJS,4,Adam Gaudette|Nick Leddy|Philipp Kurashev|Ryan Donato
+NJD,WPG,4,Brenden Dillon|Dmitry Kulikov|Eric Comrie|Johnathan Kovacevic
+FLA,WPG,4,Ben Chiarot|Dmitry Kulikov|Dominic Toninato|Nate Schmidt
+DAL,MIN,4,John Klingberg|Mats Zuccarello|Mikael Granlund|Sam Steel
+EDM,LAK,4,Cody Ceci|Troy Stecher|Viktor Arvidsson|Warren Foegele
+CAR,OTT,4,Anton Forsberg|James Reimer|Mike Reilly|Warren Foegele
+STL,VGK,4,Brandon Saad|David Perron|Ivan Barbashev|Ryan Reaves
+CHI,LAK,4,Anton Forsberg|Artemi Panarin|Olli Määttä|Phillip Danault
+CBJ,LAK,4,Anton Forsberg|Artemi Panarin|Joonas Korpisalo|Vladislav Gavrikov
+CAR,LAK,4,Anton Forsberg|Joel Edmundson|Sean Walker|Warren Foegele
+NYI,NYR,4,Anthony Duclair|Carson Soucy|Ryan Strome|Tony DeAngelo
+MIN,VGK,4,Alex Tuch|Ben Jones|Erik Haula|Ryan Reaves
+DAL,SEA,4,Colin Blackwell|Jamie Oleksiak|Mason Marchment|Nathan Bastian
+CHI,NSH,4,Colin Blackwell|Kevin Lankinen|Ryan Hartman|Seth Jones
+CHI,DAL,4,Colin Blackwell|Jason Dickinson|Mattias Janmark|Max Domi
+COL,SEA,4,Andre Burakovsky|Ben Meyers|Philipp Grubauer|Ryan Lindgren
+NYR,STL,4,Niko Mikkola|Pavel Buchnevich|Ryan Reaves|Vladimir Tarasenko
+NYR,TOR,4,Colin Blackwell|Nicolas Aube-Kubel|Ryan Reaves|Sam Carrick
+CHI,EDM,4,Connor Murphy|Jason Dickinson|Mattias Janmark|Taylor Hall
+BOS,EDM,4,Curtis Lazar|Taylor Hall|Trent Frederic|Viktor Arvidsson
+SJS,VGK,4,Adin Hill|Jaycob Megna|Ryan Reaves|Tomas Hertl
+TOR,VGK,4,Ben Hutton|Michael Amadio|Mitch Marner|Ryan Reaves
+MTL,NSH,4,Alexandre Carrier|Justin Barron|Michael McCarron|Nick Cousins
+OTT,TBL,4,Mathieu Joseph|Nick Paul|Scott Sabourin|Vladislav Namestnikov
+BOS,TOR,4,Alex Steeves|Brandon Carlo|Nick Foligno|Noel Acciari
+SEA,TBL,4,Haydn Fleury|Michael Eyssimont|Oliver Bjorkstrand|Yanni Gourde
+ANA,BOS,4,Danton Heinen|Frank Vatrano|Hampus Lindholm|Urho Vaakanainen
+BOS,WPG,4,Cole Koepke|Colin Miller|Derek Forbort|Michael Eyssimont
+BOS,LAK,4,Derek Forbort|Joonas Korpisalo|Tanner Jeannot|Viktor Arvidsson
+BUF,CGY,4,Curtis Lazar|Mark Jankowski|Nikita Zadorov|Victor Olofsson
+CBJ,TOR,4,James van Riemsdyk|Mason Marchment|Max Domi|Nick Foligno
+FLA,UTA,4,MacKenzie Weegar|Nate Schmidt|Nick Bjugstad|Vitek Vanecek
+CGY,CHI,4,Andrew Mangiapane|Dennis Gilbert|Nikita Zadorov|Olli Määttä
+CGY,UTA,4,Kevin Rooney|MacKenzie Weegar|Nick DeSimone|Olli Määttä
+ARI,FLA,4,Anthony Duclair|Nick Bjugstad|Nick Cousins|Vinnie Hinostroza
+LAK,MTL,4,Joel Armia|Joel Edmundson|Phillip Danault|Tyler Toffoli
+CGY,MTL,4,Brett Kulak|Joel Hanley|Sean Monahan|Tyler Toffoli
+ANA,CBJ,4,Danton Heinen|Erik Gudbranson|Isac Lundeström|William Karlsson
+ARI,NSH,4,Connor Ingram|Luke Schenn|Michael Bunting|Nick Cousins
+CGY,COL,4,Brett Kulak|Dennis Gilbert|Nazem Kadri|Nikita Zadorov
+DAL,VGK,4,Colin Miller|Evgenii Dadonov|Mattias Janmark|Reilly Smith
+DAL,NSH,4,Colin Blackwell|Matt Duchene|Michael Bunting|Mikael Granlund
+OTT,WSH,4,Connor Brown|Jakob Chychrun|Lars Eller|Nick Jensen
+DAL,DET,4,Adam Erne|Brendan Smith|Luke Glendening|Vladislav Namestnikov
+CBJ,NYR,4,Anthony Duclair|Artemi Panarin|Brendan Smith|Vladislav Gavrikov
+DET,VAN,4,Filip Hronek|Pius Suter|Travis Hamonic|Troy Stecher
+NYI,OTT,4,Anthony Duclair|Jean-Gabriel Pageau|Mike Reilly|Travis Hamonic
+ANA,NJD,4,Adam Henrique|Dmitry Kulikov|Kyle Palmieri|Stefan Noesen
+MTL,OTT,4,Evgenii Dadonov|Lars Eller|Mike Reilly|Nick Cousins
+CBJ,DAL,4,Brendan Smith|Mason Marchment|Matt Duchene|Max Domi
+NJD,NYI,4,Dennis Cholowski|Kyle Palmieri|Maxim Tsyplakov|Ondrej Palat
+PHI,TBL,4,Luke Glendening|Luke Schenn|Philippe Myers|Radko Gudas
+NSH,WPG,4,David Rittich|Gustav Nyquist|Luke Schenn|Nino Niederreiter
+NSH,PHI,4,Luke Schenn|Nick Cousins|Philippe Myers|Ryan Hartman
+DET,SJS,4,Alex Nedeljkovic|Gustav Nyquist|Jake Walman|Nick Leddy
+NSH,VAN,4,Erik Gudbranson|Kevin Lankinen|Kiefer Sherwood|Luke Schenn
+DAL,OTT,4,Cody Ceci|Evgenii Dadonov|Matt Duchene|Vladislav Namestnikov
+DAL,FLA,4,Alexander Petrovic|Evgenii Dadonov|Mason Marchment|Reilly Smith
+MIN,NJD,4,Dmitry Kulikov|Erik Haula|Marcus Johansson|Nick Bjugstad
+BUF,LAK,4,Brayden McNabb|Joel Armia|Luke Schenn|Tanner Pearson
+MIN,SEA,4,Carson Soucy|Frederick Gaudreau|Marcus Johansson|Ryan Donato
+ANA,STL,4,Cam Fowler|David Perron|Robby Fabbri|Ville Husso
+BUF,PHI,4,Alex Lyon|Luke Schenn|Nicolas Deslauriers|Rasmus Ristolainen
+ANA,NSH,4,Erik Gudbranson|Kiefer Sherwood|Luke Schenn|Mikael Granlund
+ARI,VAN,4,Conor Garland|Luke Schenn|Oliver Ekman-Larsson|Troy Stecher
+CGY,NYI,3,David Rittich|Ryan Strome|Travis Hamonic
+BOS,WSH,3,Dmitry Orlov|Garnet Hathaway|Marcus Johansson
+DET,NYI,3,Dennis Cholowski|Nick Leddy|Travis Hamonic
+EDM,VGK,3,David Perron|Mattias Janmark|Raphael Lavoie
+CAR,EDM,3,Jack Roslovic|Taylor Hall|Warren Foegele
+CAR,DAL,3,Brendan Smith|Logan Stankoven|Max Domi
+SJS,STL,3,Jake Walman|Nick Leddy|Ryan Reaves
+CAR,NYI,3,Mike Reilly|Nino Niederreiter|Tony DeAngelo
+MIN,NYI,3,Carson Soucy|Mike Reilly|Nino Niederreiter
+NSH,NYR,3,Brady Skjei|Colin Blackwell|Ryan McDonagh
+LAK,SJS,3,Carl Grundstrom|Jonny Brodzinski|Tyler Toffoli
+EDM,UTA,3,Connor Ingram|Kailer Yamamoto|Nick Bjugstad
+CBJ,CGY,3,Erik Gudbranson|Jake Bean|Sean Monahan
+OTT,STL,3,David Perron|Lars Eller|Mathieu Joseph
+ARI,NJD,3,Nick Bjugstad|Scott Wedgewood|Taylor Hall
+NYR,PIT,3,Conor Sheary|Kevin Hayes|Ryan Reaves
+CBJ,SJS,3,Alexander Wennberg|Gustav Nyquist|Luke Kunin
+MTL,NJD,3,Evgenii Dadonov|Jake Allen|Johnathan Kovacevic
+BOS,VAN,3,Curtis Lazar|Derek Forbort|Jake DeBrusk
+NYR,SJS,3,Barclay Goodrow|Jonny Brodzinski|Ryan Reaves
+NYI,SEA,3,Carson Soucy|Dennis Cholowski|Jordan Eberle
+NJD,VAN,3,Curtis Lazar|Jacob Markstrom|Zack MacEwen
+UTA,WPG,3,Brandon Tanev|Kevin Stenlund|Nate Schmidt
+TOR,WPG,3,David Rittich|Luke Schenn|Zach Bogosian
+SEA,VGK,3,Chandler Stephenson|Jaycob Megna|Jeremy Lauzon
+MTL,TBL,3,Corey Perry|Jonathan Drouin|Mikhail Sergachev
+EDM,MTL,3,Brett Kulak|Corey Perry|Jeff Petry
+LAK,TBL,3,Luke Schenn|Mathieu Joseph|Tanner Jeannot
+UTA,WSH,3,Liam O'Brien|Nate Schmidt|Vitek Vanecek
+ARI,CBJ,3,Anthony Duclair|Conor Garland|Max Domi
+CHI,PIT,3,Matt Grzelcyk|Olli Määttä|Sam Lafferty
+CBJ,SEA,3,Alexander Wennberg|Mason Marchment|Oliver Bjorkstrand
+ANA,MTL,3,Corey Perry|Nicolas Deslauriers|Ryan Poehling
+BUF,DET,3,Alex Lyon|Eric Comrie|Jacob Bernard-Docker
+CGY,WSH,3,Andrew Mangiapane|Anthony Mantha|Garnet Hathaway
+BOS,TBL,3,Cole Koepke|Michael Eyssimont|Tanner Jeannot
+BUF,UTA,3,JJ Peterka|Josh Doan|Michael Kesselring
+CHI,UTA,3,Jaxson Stauber|Nick Schmaltz|Olli Määttä
+PHI,VAN,3,Luke Schenn|Noah Juulsen|Zack MacEwen
+BUF,NYR,3,Conor Sheary|Sam Carrick|Will Borgen
+PHI,VGK,3,Carter Hart|Nick Cousins|Tanner Laczynski
+CHI,PHI,3,Nick Seeler|Petr Mrazek|Ryan Hartman
+STL,WSH,3,Charlie Lindgren|Lars Eller|Nathan Walker
+CHI,SEA,3,Andre Burakovsky|Colin Blackwell|Ryan Donato
+BUF,SEA,3,Brandon Montour|Marcus Johansson|Will Borgen
+ARI,OTT,3,Anthony Duclair|Jakob Chychrun|Nick Cousins
+BUF,DAL,3,Colin Miller|Ilya Lyubushkin|Tyler Myers
+MTL,NYI,3,Alexander Romanov|Mike Reilly|Noah Dobson
+VGK,WPG,3,Colin Miller|Dylan Coghlan|Nate Schmidt
+CBJ,VGK,3,Brandon Saad|Jonathan Marchessault|William Karlsson
+NYR,VGK,3,Brett Howden|Jonathan Quick|Ryan Reaves
+NYR,VAN,3,Carson Soucy|Filip Chytil|J.T. Miller
+CHI,MTL,3,Kirby Dach|Max Domi|Phillip Danault
+COL,NYR,3,Nicolas Aube-Kubel|Ryan Lindgren|Vladislav Namestnikov
+DET,TBL,3,Adam Erne|Luke Glendening|Vladislav Namestnikov
+COL,DET,3,Calvin Pickard|J.T. Compher|Vladislav Namestnikov
+PIT,WSH,3,Anthony Mantha|Conor Sheary|Lars Eller
+PHI,PIT,3,Garrett Wilson|Kevin Hayes|Ryan Poehling
+EDM,WPG,3,Dmitry Kulikov|Evander Kane|Jack Roslovic
+ARI,MIN,3,Darcy Kuemper|Nick Bjugstad|Vinnie Hinostroza
+BOS,DAL,3,Colin Miller|Reilly Smith|Tyler Seguin
+CBJ,TBL,3,Ian Cole|Jonathan Marchessault|Oliver Bjorkstrand
+PIT,TBL,3,Conor Sheary|Ian Cole|Jake Guentzel
+EDM,FLA,3,Alexander Petrovic|Dmitry Kulikov|Nick Bjugstad
+CBJ,DET,3,Brendan Smith|Gustav Nyquist|James van Riemsdyk
+ANA,COL,3,Andrew Agozzino|Josh Manson|Kiefer Sherwood
+DET,NJD,3,Brendan Smith|Dennis Cholowski|Eric Comrie
+VAN,WSH,3,Anthony Beauvillier|Nate Schmidt|Nic Dowd
+PHI,WSH,3,Garnet Hathaway|Nicolas Aube-Kubel|Radko Gudas
+COL,NYI,3,Brock Nelson|Devon Toews|Semyon Varlamov
+NSH,OTT,3,Erik Gudbranson|Matt Duchene|Nick Cousins
+BOS,SJS,3,Dmitry Orlov|Michael Eyssimont|Ryan Donato
+LAK,WSH,3,Darcy Kuemper|Matt Roy|Nic Dowd
+NYI,WSH,3,Anthony Beauvillier|Dennis Cholowski|Semyon Varlamov
+LAK,STL,3,Brayden Schenn|Joel Edmundson|Mathieu Joseph
+LAK,MIN,3,Cal Petersen|Darcy Kuemper|Kevin Fiala
+LAK,NJD,3,Brian Dumoulin|Kurtis MacDermid|Zack MacEwen
+STL,TBL,3,Ian Cole|Jonathan Drouin|Mathieu Joseph
+CAR,STL,3,Ian Cole|Joel Edmundson|Justin Faulk
+DET,MTL,3,Ben Chiarot|Jeff Petry|Joe Veleno
+CHI,STL,3,Brandon Saad|Nick Leddy|Pius Suter
+ARI,LAK,3,Darcy Kuemper|Luke Schenn|Troy Stecher
+TBL,WSH,3,Conor Sheary|Radko Gudas|Taylor Raddysh
+FLA,TOR,3,James Reimer|Mason Marchment|Noel Acciari
+CHI,NYI,3,Adam Boqvist|Anthony Duclair|Nick Leddy
+EDM,PHI,3,Anthony Stolarz|Calvin Pickard|Cam Talbot
+BUF,WSH,3,Beck Malenstyn|Conor Sheary|Marcus Johansson
+NYI,STL,3,Brayden Schenn|Nick Leddy|Scott Perunovich
+CBJ,STL,3,Alexandre Texier|Brandon Saad|Ian Cole
+ANA,OTT,3,Andrew Agozzino|David Perron|Erik Gudbranson
+CGY,NYR,3,Cam Talbot|Kevin Rooney|Ryan Strome
+CBJ,NJD,3,Brendan Smith|Damon Severson|Miles Wood
+PIT,WPG,3,Brandon Tanev|Dmitry Kulikov|Kevin Hayes
+ANA,NYI,3,Kyle Palmieri|Ross Johnston|Ryan Strome
+CHI,VGK,2,Brandon Saad|Mattias Janmark
+ATL,WPG,2,Evander Kane|Zach Bogosian
+COL,VGK,2,Brandon Saad|Nicolas Roy
+STL,VAN,2,Dakota Joshua|Pius Suter
+CAR,SEA,2,Haydn Fleury|Morgan Geekie
+SJS,TBL,2,Barclay Goodrow|Michael Eyssimont
+PHI,WPG,2,Kevin Hayes|Luke Schenn
+TBL,VAN,2,J.T. Miller|Luke Schenn
+CBJ,UTA,2,Ian Cole|Kevin Stenlund
+COL,WPG,2,Dominic Toninato|Vladislav Namestnikov
+BUF,MTL,2,Joel Armia|Nicolas Deslauriers
+COL,EDM,2,Brett Kulak|Calvin Pickard
+NJD,TOR,2,Connor Brown|Stefan Noesen
+BOS,PHI,2,Dan Vladar|Garnet Hathaway
+ARI,DET,2,Calvin Pickard|Troy Stecher
+LAK,NYI,2,Brayden Schenn|David Rittich
+CAR,WSH,2,Dmitry Orlov|Trevor van Riemsdyk
+CBJ,NYI,2,Adam Boqvist|Anthony Duclair
+ARI,NYR,2,Anthony Duclair|Tony DeAngelo
+ARI,NYI,2,Anthony Duclair|Tony DeAngelo
+SEA,VAN,2,Carson Soucy|Jared McCann
+TBL,UTA,2,Ian Cole|Mikhail Sergachev
+BOS,DET,2,Tomas Nosek|Tyler Bertuzzi
+ARI,PHX,2,Connor Murphy|Oliver Ekman-Larsson
+STL,UTA,2,Ian Cole|Scott Perunovich
+ANA,LAK,2,Ben Hutton|Luke Schenn
+TOR,UTA,2,Alexander Kerfoot|Matias Maccelli
+EDM,WSH,2,Connor Brown|Nathan Walker
+ARI,WPG,2,Kyle Capobianco|Luke Schenn
+MIN,UTA,2,Ian Cole|Nick Bjugstad
+OTT,SEA,2,Joey Daccord|Matt Murray
+MIN,TBL,2,Ian Cole|Zach Bogosian
+ARI,TBL,2,J.J. Moser|Luke Schenn
+LAK,UTA,2,Olli Määttä|Sean Durzi
+DET,LAK,2,Olli Määttä|Troy Stecher
+NYI,PHI,2,Brayden Schenn|Tony DeAngelo
+ARI,CGY,2,Joel Hanley|Troy Stecher
+EDM,NYI,2,Jordan Eberle|Ryan Strome
+BOS,NYI,2,Mike Reilly|Parker Wotherspoon
+COL,LAK,2,Darcy Kuemper|Kurtis MacDermid
+NSH,NYI,2,David Rittich|Nino Niederreiter
+BOS,MTL,2,Jordan Harris|Mike Reilly
+CHI,TBL,2,Brandon Hagel|Taylor Raddysh
+BUF,STL,2,Ryan O'Reilly|Tage Thompson
+MTL,WSH,2,Charlie Lindgren|Lars Eller
+MTL,VGK,2,Evgenii Dadonov|Nick Cousins
+CBJ,VAN,2,Conor Garland|Erik Gudbranson
+SJS,UTA,2,Andrew Agozzino|Vitek Vanecek
+ANA,CGY,2,Erik Gudbranson|Ryan Strome
+NJD,NYR,2,Brendan Smith|Kevin Rooney
+SEA,STL,2,Jaden Schwartz|Vince Dunn
+CGY,WPG,2,David Rittich|Derek Forbort
+BUF,CBJ,2,Josh Dunne|Justin Danforth
+EDM,NYR,2,Cam Talbot|Ryan Strome
+ARI,PIT,2,Michael Bunting|Nick Bjugstad
+MTL,VAN,2,Noah Juulsen|Tyler Toffoli
+DET,VGK,2,David Perron|Tomas Nosek
+BUF,SJS,2,Evander Kane|James Reimer
+COL,PHI,2,Calvin Pickard|Nicolas Aube-Kubel
+NYI,WPG,2,David Rittich|Nino Niederreiter
+NYI,TOR,2,David Rittich|John Tavares
+EDM,SEA,2,Adam Larsson|Jordan Eberle
+FLA,STL,2,Niko Mikkola|Noel Acciari
+BOS,NYR,2,Frank Vatrano|Urho Vaakanainen
+OTT,WPG,2,Dylan DeMelo|Vladislav Namestnikov
+CHI,WPG,2,Dominic Toninato|Jonathan Toews
+DAL,VAN,2,Jason Dickinson|Tyler Myers
+CAR,TBL,2,Haydn Fleury|Ian Cole
+ATL,BUF,2,Evander Kane|Zach Bogosian
+NJD,TBL,2,Blake Coleman|Ondrej Palat
+NJD,NSH,2,Cody Glass|Erik Haula
+ANA,WSH,2,John Carlson|Radko Gudas
+ARI,VGK,2,Adin Hill|Nick Cousins
+DET,SEA,2,Dennis Cholowski|Mason Appleton
+NSH,UTA,1,Connor Ingram
+ARI,SJS,1,Adin Hill
+COL,VAN,1,Kiefer Sherwood
+PHX,VAN,1,Oliver Ekman-Larsson
+CBJ,EDM,1,Jack Roslovic
+NYI,PIT,1,Parker Wotherspoon
+MTL,SEA,1,Cale Fleury
+MTL,TOR,1,Max Domi
+NJD,PHI,1,Zack MacEwen
+BOS,STL,1,Noel Acciari
+CAR,VAN,1,Jalen Chatfield
+MTL,UTA,1,Mikhail Sergachev
+CBJ,WSH,1,Pierre-Luc Dubois
+PHX,TOR,1,Oliver Ekman-Larsson
+PHI,SJS,1,Carl Grundstrom
+CGY,DAL,1,Joel Hanley
+SEA,UTA,1,Brandon Tanev
+NYR,UTA,1,Kevin Rooney
+PHI,STL,1,Brayden Schenn
+CHI,PHX,1,Connor Murphy
+FLA,NYI,1,Anthony Duclair
+UTA,VGK,1,Nate Schmidt
+ATL,MIN,1,Zach Bogosian
+ANA,CHI,1,Petr Mrazek
+ATL,EDM,1,Evander Kane
+NJD,STL,1,Jake Allen
+CHI,NJD,1,Taylor Hall
+DAL,WSH,1,Brenden Dillon
+NSH,STL,1,Ryan O'Reilly
+ARI,BOS,1,Taylor Hall
+ANA,UTA,1,Andrew Agozzino
+OTT,UTA,1,Andrew Agozzino
+DET,NSH,1,Gustav Nyquist
+CGY,MIN,1,Cam Talbot
+MTL,SJS,1,Tyler Toffoli
+CGY,SEA,1,Calle Jarnkrok
+CGY,SJS,1,Tyler Toffoli
+ATL,TBL,1,Zach Bogosian
+NYI,TBL,1,Ondrej Palat
+ATL,TOR,1,Zach Bogosian
+DET,UTA,1,Olli Määttä
+UTA,VAN,1,Nate Schmidt
+NYI,SJS,1,Nick Leddy
+ANA,ARI,1,Luke Schenn
+EDM,TBL,1,Corey Perry
+DAL,STL,1,Radek Faksa
+DAL,LAK,1,Cody Ceci
+LAK,SEA,1,Brian Dumoulin
+CAR,UTA,1,Ian Cole
+DAL,PHI,1,Luke Glendening
+TBL,VGK,1,Jonathan Marchessault
+EDM,PHX,1,Connor Murphy
+ATL,VAN,1,Evander Kane
+CGY,TBL,1,Blake Coleman
+ATL,SJS,1,Evander Kane
+NYI,UTA,1,Scott Perunovich

@@ -79,8 +79,18 @@ def build_figure(
     pos: dict,
     highlight_team: str | None,
     player_teams: set[str],
+    edges_df: pd.DataFrame,
 ) -> go.Figure:
+    # Build a lookup from (team_a, team_b) → shared_player_names
+    names_lookup: dict[tuple[str, str], str] = {}
+    if "shared_player_names" in edges_df.columns:
+        for _, row in edges_df.iterrows():
+            names_lookup[(row["team_a"], row["team_b"])] = row["shared_player_names"]
+            names_lookup[(row["team_b"], row["team_a"])] = row["shared_player_names"]
+
     edge_traces = []
+    midpoint_x, midpoint_y, midpoint_hover = [], [], []
+
     for u, v, data in G.edges(data=True):
         x0, y0 = pos[u]
         x1, y1 = pos[v]
@@ -108,6 +118,26 @@ def build_figure(
                 hoverinfo="none",
             )
         )
+
+        # Midpoint hover point
+        names_raw = names_lookup.get((u, v), "")
+        names_list = names_raw.split("|") if names_raw else []
+        hover_text = f"<b>{u} ↔ {v}</b> ({weight} players)<br>" + "<br>".join(names_list)
+        midpoint_x.append((x0 + x1) / 2)
+        midpoint_y.append((y0 + y1) / 2)
+        midpoint_hover.append(hover_text)
+
+    edge_traces.append(
+        go.Scatter(
+            x=midpoint_x,
+            y=midpoint_y,
+            mode="markers",
+            marker=dict(size=8, color="rgba(0,0,0,0)"),
+            hovertext=midpoint_hover,
+            hoverinfo="text",
+            hoverlabel=dict(bgcolor="#1e2530", font=dict(color="white")),
+        )
+    )
 
     node_x, node_y, node_text, node_size, node_color = [], [], [], [], []
     for node in G.nodes():
@@ -229,6 +259,13 @@ def main():
     if highlight_team == "(none)":
         highlight_team = None
 
+    # Team comparison
+    st.sidebar.markdown("---")
+    st.sidebar.subheader("Team comparison")
+    all_teams_sorted = sorted(set(pts["team"].unique()))
+    compare_a = st.sidebar.selectbox("Team A", options=["(none)"] + all_teams_sorted, key="cmp_a")
+    compare_b = st.sidebar.selectbox("Team B", options=["(none)"] + all_teams_sorted, key="cmp_b")
+
     # Player lookup
     st.sidebar.markdown("---")
     st.sidebar.subheader("Player lookup")
@@ -265,7 +302,7 @@ def main():
         return
 
     pos = spring_layout(G)
-    fig = build_figure(G, pos, highlight_team, player_teams & set(G.nodes))
+    fig = build_figure(G, pos, highlight_team, player_teams & set(G.nodes), edges)
     st.plotly_chart(fig, use_container_width=True)
 
     # ---- Metrics ----
@@ -283,13 +320,51 @@ def main():
             .sort_values("season")[["season", "team", "games_played"]]
             .rename(columns={"season": "Season", "team": "Team", "games_played": "GP"})
         )
+        career["Season"] = career["Season"].str[:4]
         if not has_gp or career["GP"].eq(0).all():
             career = career.drop(columns=["GP"])
         st.dataframe(career, use_container_width=True, hide_index=True)
 
+    # ---- Team comparison table ----
+    if compare_a != "(none)" and compare_b != "(none)" and compare_a != compare_b:
+        st.subheader(f"Shared players — {compare_a} & {compare_b}")
+        pts["full_name"] = pts["first_name"] + " " + pts["last_name"]
+        a_players = pts[pts["team"] == compare_a].groupby("player_id")
+        b_players = pts[pts["team"] == compare_b].groupby("player_id")
+        shared_ids = set(a_players.groups) & set(b_players.groups)
+
+        if not shared_ids:
+            st.caption("No shared players found between these two teams.")
+        else:
+            rows = []
+            for pid in sorted(shared_ids):
+                a_rows = pts[(pts["player_id"] == pid) & (pts["team"] == compare_a)]
+                b_rows = pts[(pts["player_id"] == pid) & (pts["team"] == compare_b)]
+                name = a_rows["full_name"].iloc[0]
+                position = a_rows["position"].iloc[0]
+                a_seasons = ", ".join(sorted(a_rows["season"].astype(str).str[:4]))
+                b_seasons = ", ".join(sorted(b_rows["season"].astype(str).str[:4]))
+                a_gp = int(a_rows["games_played"].sum()) if has_gp else None
+                b_gp = int(b_rows["games_played"].sum()) if has_gp else None
+                current_team = a_rows["current_team"].iloc[0] if "current_team" in a_rows.columns else None
+                row = {
+                    "Player": name,
+                    "Pos": position,
+                    "Current Team": current_team if pd.notna(current_team) else "—",
+                    f"{compare_a} seasons": a_seasons,
+                    f"{compare_b} seasons": b_seasons,
+                }
+                if has_gp:
+                    row[f"{compare_a} GP"] = a_gp
+                    row[f"{compare_b} GP"] = b_gp
+                rows.append(row)
+
+            comparison_df = pd.DataFrame(rows).sort_values("Player")
+            st.dataframe(comparison_df, use_container_width=True, hide_index=True)
+
     # ---- Top connections table ----
     st.subheader("Top team connections")
-    top = edges.head(20).copy()
+    top = edges.head(20)[["team_a", "team_b", "shared_players"]].copy()
     top.columns = ["Team A", "Team B", "Shared Players"]
     st.dataframe(top, use_container_width=True, hide_index=True)
 

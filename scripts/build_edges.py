@@ -44,25 +44,26 @@ def parse_roster(data: dict, team: str, season: str) -> list[dict]:
     return records
 
 
-def get_active_player_ids() -> set[int]:
-    """Return player IDs from the current (20252026) season rosters."""
+def get_active_player_map() -> dict[int, str]:
+    """Return a player_id → current team mapping from the (20252026) season rosters."""
     active_dir = RAW_DIR / "rosters" / ACTIVE_SEASON
     if not active_dir.exists():
         raise FileNotFoundError(
             f"No {ACTIVE_SEASON} roster data found. "
             f"Run: python scripts/fetch_rosters.py --start-season {ACTIVE_SEASON} --end-season {ACTIVE_SEASON}"
         )
-    active_ids: set[int] = set()
+    active_map: dict[int, str] = {}
     for path in active_dir.glob("*.json"):
+        team = path.stem
         with open(path) as f:
             data = json.load(f)
         for group in ("forwards", "defensemen", "goalies"):
             for player in data.get(group, []):
                 pid = player.get("id")
                 if pid is not None:
-                    active_ids.add(int(pid))
-    print(f"Active players in {ACTIVE_SEASON}: {len(active_ids)}")
-    return active_ids
+                    active_map[int(pid)] = team
+    print(f"Active players in {ACTIVE_SEASON}: {len(active_map)}")
+    return active_map
 
 
 def build_player_team_seasons(active_only: bool = False) -> pd.DataFrame:
@@ -71,8 +72,7 @@ def build_player_team_seasons(active_only: bool = False) -> pd.DataFrame:
         raise FileNotFoundError(f"No roster data found at {rosters_dir}. Run fetch_rosters.py first.")
 
     all_records = []
-    # Exclude the active season from the career history scan — it's used only as a filter
-    json_files = [p for p in rosters_dir.glob("*/*.json") if p.parent.name != ACTIVE_SEASON]
+    json_files = list(rosters_dir.glob("*/*.json"))
     print(f"Parsing {len(json_files)} roster files…")
 
     for path in json_files:
@@ -88,10 +88,13 @@ def build_player_team_seasons(active_only: bool = False) -> pd.DataFrame:
     df = df.drop_duplicates(subset=["player_id", "team", "season"])
 
     if active_only:
-        active_ids = get_active_player_ids()
+        active_map = get_active_player_map()
         before = len(df)
-        df = df[df["player_id"].isin(active_ids)]
+        df = df[df["player_id"].isin(active_map)]
+        df["current_team"] = df["player_id"].map(active_map)
         print(f"Filtered to active players: {before:,} → {len(df):,} records")
+    else:
+        df["current_team"] = None
 
     # Merge in games_played and avg_toi_sec if stats data is available
     stats = load_stats()
@@ -159,7 +162,7 @@ def build_team_edges(pts: pd.DataFrame) -> pd.DataFrame:
     """
     For each player, find all teams they appeared on.
     For every pair of those teams, that player counts as a shared connection.
-    Returns a DataFrame with columns: team_a, team_b, shared_players.
+    Returns a DataFrame with columns: team_a, team_b, shared_players, shared_player_names.
     """
     # One row per (player_id, team) — collapse seasons
     player_teams = (
@@ -167,6 +170,14 @@ def build_team_edges(pts: pd.DataFrame) -> pd.DataFrame:
         .apply(set)
         .reset_index()
         .rename(columns={"team": "teams"})
+    )
+
+    # player_id → full name lookup
+    name_lookup = (
+        (pts["first_name"] + " " + pts["last_name"])
+        .groupby(pts["player_id"])
+        .first()
+        .to_dict()
     )
 
     # Generate all team pairs for players who played for 2+ teams
@@ -183,8 +194,15 @@ def build_team_edges(pts: pd.DataFrame) -> pd.DataFrame:
             pair_counts[key].add(player_id)
 
     rows = [
-        {"team_a": t1, "team_b": t2, "shared_players": len(players)}
-        for (t1, t2), players in pair_counts.items()
+        {
+            "team_a": t1,
+            "team_b": t2,
+            "shared_players": len(pids),
+            "shared_player_names": "|".join(
+                sorted(name_lookup.get(pid, str(pid)) for pid in pids)
+            ),
+        }
+        for (t1, t2), pids in pair_counts.items()
     ]
     edges = pd.DataFrame(rows).sort_values("shared_players", ascending=False).reset_index(drop=True)
     return edges
