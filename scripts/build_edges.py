@@ -14,7 +14,6 @@ Usage:
 
 import argparse
 import json
-from itertools import combinations
 from pathlib import Path
 
 import pandas as pd
@@ -160,17 +159,19 @@ def load_stats() -> pd.DataFrame:
 
 def build_team_edges(pts: pd.DataFrame) -> pd.DataFrame:
     """
-    For each player, find all teams they appeared on.
-    For every pair of those teams, that player counts as a shared connection.
+    For each currently active player, create edges between their current team
+    and every historical team they appeared on. This anchors the network to
+    current rosters: an edge A–B means a player *currently on* A (or B) has
+    previously played for B (or A).
+
+    Requires the current_team column to be populated (run with --active-only).
     Returns a DataFrame with columns: team_a, team_b, shared_players, shared_player_names.
     """
-    # One row per (player_id, team) — collapse seasons
-    player_teams = (
-        pts.groupby("player_id")["team"]
-        .apply(set)
-        .reset_index()
-        .rename(columns={"team": "teams"})
-    )
+    if "current_team" not in pts.columns or pts["current_team"].isna().all():
+        raise ValueError(
+            "current_team column is missing or empty. "
+            "Run: python scripts/build_edges.py --active-only"
+        )
 
     # player_id → full name lookup
     name_lookup = (
@@ -180,29 +181,40 @@ def build_team_edges(pts: pd.DataFrame) -> pd.DataFrame:
         .to_dict()
     )
 
-    # Generate all team pairs for players who played for 2+ teams
-    pair_counts: dict[tuple[str, str], set[int]] = {}
-    multi = player_teams[player_teams["teams"].apply(len) > 1]
-    print(f"Players who appeared on 2+ teams: {len(multi)}")
+    # player_id → current team (active players only)
+    current_team_lookup = (
+        pts.dropna(subset=["current_team"])
+        .drop_duplicates("player_id")
+        .set_index("player_id")["current_team"]
+        .to_dict()
+    )
 
-    for _, row in multi.iterrows():
-        player_id = row["player_id"]
-        for t1, t2 in combinations(sorted(row["teams"]), 2):
-            key = (t1, t2)
-            if key not in pair_counts:
-                pair_counts[key] = set()
-            pair_counts[key].add(player_id)
+    # player_id → all teams ever
+    player_all_teams = pts.groupby("player_id")["team"].apply(set).to_dict()
+
+    print(f"Active players with current team: {len(current_team_lookup)}")
+
+    pair_counts: dict[tuple[str, str], set[int]] = {}
+    for player_id, current in current_team_lookup.items():
+        historical = player_all_teams.get(player_id, set()) - {current}
+        for h in historical:
+            key = (h, current)  # directed: former team → current team
+            pair_counts.setdefault(key, set()).add(player_id)
+
+    multi_team_players = sum(1 for pid, ct in current_team_lookup.items()
+                             if len(player_all_teams.get(pid, set()) - {ct}) > 0)
+    print(f"Active players with 2+ teams in career: {multi_team_players}")
 
     rows = [
         {
-            "team_a": t1,
-            "team_b": t2,
+            "from_team": src,
+            "to_team": dst,
             "shared_players": len(pids),
             "shared_player_names": "|".join(
                 sorted(name_lookup.get(pid, str(pid)) for pid in pids)
             ),
         }
-        for (t1, t2), pids in pair_counts.items()
+        for (src, dst), pids in pair_counts.items()
     ]
     edges = pd.DataFrame(rows).sort_values("shared_players", ascending=False).reset_index(drop=True)
     return edges

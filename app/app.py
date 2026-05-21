@@ -8,7 +8,6 @@ Run:
     streamlit run app/app.py
 """
 
-from itertools import combinations
 from pathlib import Path
 
 import networkx as nx
@@ -36,22 +35,26 @@ def load_data():
 
 @st.cache_data
 def compute_edges(pts_filtered: pd.DataFrame) -> pd.DataFrame:
-    player_teams = (
-        pts_filtered.groupby("player_id")["team"]
-        .apply(set)
-        .reset_index()
-        .rename(columns={"team": "teams"})
+    if "current_team" not in pts_filtered.columns or pts_filtered["current_team"].isna().all():
+        return pd.DataFrame(columns=["from_team", "to_team", "shared_players"])
+    current_team_lookup = (
+        pts_filtered.dropna(subset=["current_team"])
+        .drop_duplicates("player_id")
+        .set_index("player_id")["current_team"]
+        .to_dict()
     )
+    player_all_teams = pts_filtered.groupby("player_id")["team"].apply(set).to_dict()
     pair_counts: dict[tuple[str, str], set[int]] = {}
-    for _, row in player_teams[player_teams["teams"].apply(len) > 1].iterrows():
-        for t1, t2 in combinations(sorted(row["teams"]), 2):
-            pair_counts.setdefault((t1, t2), set()).add(row["player_id"])
+    for player_id, current in current_team_lookup.items():
+        historical = player_all_teams.get(player_id, set()) - {current}
+        for h in historical:
+            pair_counts.setdefault((h, current), set()).add(player_id)
     rows = [
-        {"team_a": t1, "team_b": t2, "shared_players": len(pids)}
-        for (t1, t2), pids in pair_counts.items()
+        {"from_team": src, "to_team": dst, "shared_players": len(pids)}
+        for (src, dst), pids in pair_counts.items()
     ]
     if not rows:
-        return pd.DataFrame(columns=["team_a", "team_b", "shared_players"])
+        return pd.DataFrame(columns=["from_team", "to_team", "shared_players"])
     return pd.DataFrame(rows).sort_values("shared_players", ascending=False).reset_index(drop=True)
 
 
@@ -59,10 +62,10 @@ def compute_edges(pts_filtered: pd.DataFrame) -> pd.DataFrame:
 # Graph construction
 # ---------------------------------------------------------------------------
 
-def build_graph(edges: pd.DataFrame, min_shared: int) -> nx.Graph:
-    G = nx.Graph()
+def build_graph(edges: pd.DataFrame, min_shared: int) -> nx.DiGraph:
+    G = nx.DiGraph()
     for _, row in edges[edges["shared_players"] >= min_shared].iterrows():
-        G.add_edge(row["team_a"], row["team_b"], weight=row["shared_players"])
+        G.add_edge(row["from_team"], row["to_team"], weight=row["shared_players"])
     return G
 
 
@@ -89,15 +92,18 @@ def build_figure(
     player_teams: set[str],
     edges_df: pd.DataFrame,
 ) -> go.Figure:
-    # Build a lookup from (team_a, team_b) → shared_player_names
+    # Build a lookup from (from_team, to_team) → shared_player_names
     names_lookup: dict[tuple[str, str], str] = {}
     if "shared_player_names" in edges_df.columns:
         for _, row in edges_df.iterrows():
-            names_lookup[(row["team_a"], row["team_b"])] = row["shared_player_names"]
-            names_lookup[(row["team_b"], row["team_a"])] = row["shared_player_names"]
+            names_lookup[(row["from_team"], row["to_team"])] = row["shared_player_names"]
+
+    # Pre-compute node sizes for arrowhead standoff
+    node_sizes_map = {node: 50 + G.degree(node, weight="weight") / 8 for node in G.nodes()}
 
     edge_traces = []
     midpoint_x, midpoint_y, midpoint_hover = [], [], []
+    annotations = []
 
     for u, v, data in G.edges(data=True):
         x0, y0 = pos[u]
@@ -108,13 +114,13 @@ def build_figure(
         is_highlight_edge = highlight_team and highlight_team in (u, v)
 
         if is_player_edge:
-            color = "rgba(50,205,50,0.8)"
+            color = "rgba(50,205,50,1.0)"
             width = max(7.5, weight / 2)
         elif is_highlight_edge:
-            color = "rgba(255,100,0,0.7)"
+            color = "rgba(255,100,0,0.9)"
             width = max(5.0, weight * 5 / 12)
         else:
-            color = "rgba(200,200,200,0.25)"
+            color = "rgba(200,200,200,0.65)"
             width = max(2.5, weight / 3)
 
         edge_traces.append(
@@ -127,10 +133,26 @@ def build_figure(
             )
         )
 
+        # Arrowhead pointing at the target node
+        standoff = node_sizes_map.get(v, 60) / 2
+        annotations.append(dict(
+            x=x1, y=y1,
+            ax=x0, ay=y0,
+            xref="x", yref="y",
+            axref="x", ayref="y",
+            showarrow=True,
+            arrowhead=3,
+            arrowsize=2.0,
+            arrowwidth=max(2.0, width * 0.5),
+            arrowcolor=color,
+            standoff=standoff,
+            text="",
+        ))
+
         # Midpoint hover point
         names_raw = names_lookup.get((u, v), "")
         names_list = names_raw.split("|") if names_raw else []
-        hover_text = f"<b>{u} ↔ {v}</b> ({weight} players)<br>" + "<br>".join(names_list)
+        hover_text = f"<b>{u} → {v}</b> ({weight} players)<br>" + "<br>".join(names_list)
         midpoint_x.append((x0 + x1) / 2)
         midpoint_y.append((y0 + y1) / 2)
         midpoint_hover.append(hover_text)
@@ -152,8 +174,14 @@ def build_figure(
         x, y = pos[node]
         weighted_degree = G.degree(node, weight="weight")
         team_count = G.degree(node)
-        neighbors = sorted(G[node].items(), key=lambda kv: kv[1]["weight"], reverse=True)
-        top_neighbors = "<br>".join(f"  {nb}: {d['weight']} players" for nb, d in neighbors[:5])
+        # Aggregate weights across both directions for the tooltip
+        neighbor_weights: dict[str, int] = {}
+        for nb, d in G[node].items():  # outgoing
+            neighbor_weights[nb] = neighbor_weights.get(nb, 0) + d["weight"]
+        for nb in G.predecessors(node):  # incoming
+            neighbor_weights[nb] = neighbor_weights.get(nb, 0) + G[nb][node]["weight"]
+        neighbors = sorted(neighbor_weights.items(), key=lambda kv: kv[1], reverse=True)
+        top_neighbors = "<br>".join(f"  {nb}: {w} players" for nb, w in neighbors[:5])
         node_x.append(x)
         node_y.append(y)
         node_text.append(
@@ -197,6 +225,7 @@ def build_figure(
             paper_bgcolor="#0e1117",
             plot_bgcolor="#0e1117",
             font=dict(color="white"),
+            annotations=annotations,
         ),
     )
     return fig
@@ -209,7 +238,7 @@ def build_figure(
 def main():
     st.set_page_config(page_title="NHL Team Network", layout="wide")
     st.title("NHL Team Network")
-    st.caption("Nodes = teams · Edge weight = number of currently active players shared between two teams")
+    st.caption("Nodes = teams · Arrows point from a player's former team to their current team · Edge weight = number of active players")
 
     if not EDGES_PATH.exists():
         st.error(
@@ -266,7 +295,7 @@ def main():
     )
 
     # Team highlight
-    all_teams = sorted(set(edges["team_a"]) | set(edges["team_b"]))
+    all_teams = sorted(set(edges["from_team"]) | set(edges["to_team"]))
     highlight_team = st.sidebar.selectbox("Highlight team", options=["(none)"] + all_teams)
     if highlight_team == "(none)":
         highlight_team = None
@@ -376,8 +405,8 @@ def main():
 
     # ---- Top connections table ----
     st.subheader("Top team connections")
-    top = edges.head(20)[["team_a", "team_b", "shared_players"]].copy()
-    top.columns = ["Team A", "Team B", "Shared Players"]
+    top = edges.head(20)[["from_team", "to_team", "shared_players"]].copy()
+    top.columns = ["From", "To (current)", "Shared Players"]
     st.dataframe(top, use_container_width=True, hide_index=True)
 
 
