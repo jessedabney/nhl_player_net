@@ -114,13 +114,13 @@ def build_figure(
         is_highlight_edge = highlight_team and highlight_team in (u, v)
 
         if is_player_edge:
-            color = "rgba(50,205,50,0.8)"
+            color = "rgba(50,205,50,1.0)"
             width = max(7.5, weight / 2)
         elif is_highlight_edge:
-            color = "rgba(255,100,0,0.7)"
+            color = "rgba(255,100,0,0.9)"
             width = max(5.0, weight * 5 / 12)
         else:
-            color = "rgba(200,200,200,0.25)"
+            color = "rgba(200,200,200,0.65)"
             width = max(2.5, weight / 3)
 
         edge_traces.append(
@@ -141,9 +141,9 @@ def build_figure(
             xref="x", yref="y",
             axref="x", ayref="y",
             showarrow=True,
-            arrowhead=2,
-            arrowsize=1.2,
-            arrowwidth=max(1.5, width * 0.4),
+            arrowhead=3,
+            arrowsize=2.0,
+            arrowwidth=max(2.0, width * 0.5),
             arrowcolor=color,
             standoff=standoff,
             text="",
