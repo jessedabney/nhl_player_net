@@ -1,0 +1,25 @@
+/* Dropdown text */
+.dash-dropdown,
+.dash-dropdown .dash-dropdown-value,
+.dash-dropdown .dash-dropdown-value-item,
+.dash-dropdown-option {
+    color: #1a1a2e !important;
+}
+
+/* Slider tick marks and labels */
+.dash-slider-mark {
+    color: #ffffff !important;
+}
+
+/* Slider tooltip value box */
+.dash-slider-tooltip {
+    color: #1a1a2e !important;
+}
+
+/* Catch-all for any remaining slider text */
+.dash-slider-input,
+.dash-slider [type="number"],
+.dash-slider input,
+.dash-slider-container input {
+    color: #1a1a2e !important;
+}

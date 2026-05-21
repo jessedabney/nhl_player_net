@@ -15,3 +15,8 @@ networkx = ">=3.6.1,<4"
 streamlit = ">=1.57.0,<2"
 plotly = ">=6.6.0,<7"
 scipy = ">=1.17.1,<2"
+dash = ">=4.1.0,<5"
+dash-bootstrap-components = ">=2.0.4,<3"
+
+[pypi-dependencies]
+dash-cytoscape = ">=1.0.2, <2"
