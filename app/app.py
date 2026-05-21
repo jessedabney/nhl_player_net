@@ -15,6 +15,17 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
+
+def _bezier(x0: float, y0: float, x1: float, y1: float, cx: float, cy: float, n: int = 30) -> tuple[list, list]:
+    """Quadratic Bezier curve from (x0,y0) to (x1,y1) with control point (cx,cy)."""
+    xs, ys = [], []
+    for i in range(n):
+        t = i / (n - 1)
+        s = 1 - t
+        xs.append(s * s * x0 + 2 * s * t * cx + t * t * x1)
+        ys.append(s * s * y0 + 2 * s * t * cy + t * t * y1)
+    return xs, ys
+
 EDGES_PATH = Path(__file__).parent.parent / "data" / "processed" / "team_edges.csv"
 PTS_PATH = Path(__file__).parent.parent / "data" / "processed" / "player_team_seasons.csv"
 
@@ -101,6 +112,10 @@ def build_figure(
     # Pre-compute node sizes for arrowhead standoff
     node_sizes_map = {node: 50 + G.degree(node, weight="weight") / 8 for node in G.nodes()}
 
+    # Identify bidirectional pairs so we can curve overlapping edges
+    bidirectional = {(u, v) for u, v in G.edges() if G.has_edge(v, u)}
+    CURVE_OFFSET = 0.15  # fixed perpendicular offset in layout coordinates
+
     edge_traces = []
     midpoint_x, midpoint_y, midpoint_hover = [], [], []
     annotations = []
@@ -123,21 +138,39 @@ def build_figure(
             color = "rgba(200,200,200,0.65)"
             width = max(2.5, weight / 3)
 
+        # Curve bidirectional edges; straight line for one-way edges
+        if (u, v) in bidirectional:
+            dx, dy = x1 - x0, y1 - y0
+            length = (dx ** 2 + dy ** 2) ** 0.5
+            if length > 0:
+                mx, my = (x0 + x1) / 2, (y0 + y1) / 2
+                cx = mx - (dy / length) * CURVE_OFFSET
+                cy = my + (dx / length) * CURVE_OFFSET
+                bx, by = _bezier(x0, y0, x1, y1, cx, cy)
+            else:
+                bx, by = [x0, x1], [y0, y1]
+            arrow_ax, arrow_ay = bx[-2], by[-2]
+            mid_x, mid_y = bx[len(bx) // 2], by[len(by) // 2]
+        else:
+            bx, by = [x0, x1], [y0, y1]
+            arrow_ax, arrow_ay = x0, y0
+            mid_x, mid_y = (x0 + x1) / 2, (y0 + y1) / 2
+
         edge_traces.append(
             go.Scatter(
-                x=[x0, x1, None],
-                y=[y0, y1, None],
+                x=bx + [None],
+                y=by + [None],
                 mode="lines",
                 line=dict(width=width, color=color),
                 hoverinfo="none",
             )
         )
 
-        # Arrowhead pointing at the target node
+        # Arrowhead aligned to curve direction near the target node
         standoff = node_sizes_map.get(v, 60) / 2
         annotations.append(dict(
             x=x1, y=y1,
-            ax=x0, ay=y0,
+            ax=arrow_ax, ay=arrow_ay,
             xref="x", yref="y",
             axref="x", ayref="y",
             showarrow=True,
@@ -149,12 +182,12 @@ def build_figure(
             text="",
         ))
 
-        # Midpoint hover point
+        # Midpoint hover point aligned to the curve
         names_raw = names_lookup.get((u, v), "")
         names_list = names_raw.split("|") if names_raw else []
         hover_text = f"<b>{u} → {v}</b> ({weight} players)<br>" + "<br>".join(names_list)
-        midpoint_x.append((x0 + x1) / 2)
-        midpoint_y.append((y0 + y1) / 2)
+        midpoint_x.append(mid_x)
+        midpoint_y.append(mid_y)
         midpoint_hover.append(hover_text)
 
     edge_traces.append(
@@ -341,6 +374,11 @@ def main():
     if len(G.nodes) == 0:
         st.warning("No edges meet the current filter — try lowering the minimum shared players.")
         return
+
+    if highlight_team and highlight_team in G:
+        keep = {highlight_team} | set(G.predecessors(highlight_team)) | set(G.successors(highlight_team))
+        G = G.subgraph(keep).copy()
+        G.remove_edges_from([(u, v) for u, v in G.edges() if highlight_team not in (u, v)])
 
     pos = get_layout(G, layout_name)
     fig = build_figure(G, pos, highlight_team, player_teams & set(G.nodes), edges)
