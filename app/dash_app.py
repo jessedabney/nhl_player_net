@@ -15,10 +15,12 @@ import dash_bootstrap_components as dbc
 import dash_cytoscape as cyto
 import networkx as nx
 import pandas as pd
-from dash import Input, Output, State, callback, dash_table, dcc, html
+from dash import Input, Output, callback, ctx, dash_table, dcc, html, no_update
 
 EDGES_PATH = Path(__file__).parent.parent / "data" / "processed" / "team_edges.csv"
 PTS_PATH = Path(__file__).parent.parent / "data" / "processed" / "player_team_seasons.csv"
+
+LOGO_URL = "/assets/logos/{}.svg"
 
 # ---------------------------------------------------------------------------
 # Data loading
@@ -38,38 +40,38 @@ MAX_GP = int(PTS_DF["games_played"].max()) if HAS_GP else 0
 
 # Team city coordinates (lat, lon)
 TEAM_COORDS = {
-    "ANA": (33.81, -117.88),   # Anaheim
-    "BOS": (42.37, -71.06),    # Boston
-    "BUF": (42.87, -78.88),    # Buffalo
-    "CAR": (35.80, -78.72),    # Raleigh
-    "CBJ": (39.97, -83.01),    # Columbus
-    "CGY": (51.04, -114.06),   # Calgary
-    "CHI": (41.88, -87.67),    # Chicago
-    "COL": (39.75, -105.00),   # Denver
-    "DAL": (32.79, -96.81),    # Dallas
-    "DET": (42.34, -83.06),    # Detroit
-    "EDM": (53.55, -113.50),   # Edmonton
-    "FLA": (26.16, -80.33),    # Sunrise
-    "LAK": (34.04, -118.27),   # Los Angeles
-    "MIN": (44.95, -93.10),    # St. Paul
-    "MTL": (45.50, -73.57),    # Montreal
-    "NJD": (40.73, -74.07),    # Newark
-    "NSH": (36.16, -86.78),    # Nashville
-    "NYI": (40.72, -73.73),    # Elmont (UBS Arena)
-    "NYR": (40.75, -73.99),    # Manhattan (MSG)
-    "OTT": (45.30, -75.93),    # Ottawa
-    "PHI": (39.90, -75.17),    # Philadelphia
-    "PIT": (40.44, -80.00),    # Pittsburgh
-    "SEA": (47.62, -122.35),   # Seattle
-    "SJS": (37.33, -121.90),   # San Jose
-    "STL": (38.63, -90.20),    # St. Louis
-    "TBL": (27.94, -82.45),    # Tampa
-    "TOR": (43.64, -79.38),    # Toronto
-    "UTA": (40.77, -111.90),   # Salt Lake City
-    "VAN": (49.28, -123.11),   # Vancouver
-    "VGK": (36.10, -115.18),   # Las Vegas
-    "WPG": (49.89, -97.14),    # Winnipeg
-    "WSH": (38.90, -77.02),    # Washington DC
+    "ANA": (33.81, -117.88),
+    "BOS": (42.37, -71.06),
+    "BUF": (42.87, -78.88),
+    "CAR": (35.80, -78.72),
+    "CBJ": (39.97, -83.01),
+    "CGY": (51.04, -114.06),
+    "CHI": (41.88, -87.67),
+    "COL": (39.75, -105.00),
+    "DAL": (32.79, -96.81),
+    "DET": (42.34, -83.06),
+    "EDM": (53.55, -113.50),
+    "FLA": (26.16, -80.33),
+    "LAK": (34.04, -118.27),
+    "MIN": (44.95, -93.10),
+    "MTL": (45.50, -73.57),
+    "NJD": (40.73, -74.07),
+    "NSH": (36.16, -86.78),
+    "NYI": (40.72, -73.73),
+    "NYR": (40.75, -73.99),
+    "OTT": (45.30, -75.93),
+    "PHI": (39.90, -75.17),
+    "PIT": (40.44, -80.00),
+    "SEA": (47.62, -122.35),
+    "SJS": (37.33, -121.90),
+    "STL": (38.63, -90.20),
+    "TBL": (27.94, -82.45),
+    "TOR": (43.64, -79.38),
+    "UTA": (40.77, -111.90),
+    "VAN": (49.28, -123.11),
+    "VGK": (36.10, -115.18),
+    "WPG": (49.89, -97.14),
+    "WSH": (38.90, -77.02),
 }
 
 
@@ -135,33 +137,73 @@ def compute_edges_filtered(pts_filtered: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(rows).sort_values("shared_players", ascending=False).reset_index(drop=True)
 
 
-def graph_to_cytoscape(G: nx.DiGraph, pos: dict, highlight_team: str | None = None) -> list[dict]:
+def graph_to_cytoscape(
+    G: nx.DiGraph,
+    pos: dict,
+    highlight_team: str | None = None,
+    compare_teams: tuple[str, str] | None = None,
+    player_teams: set[str] | None = None,
+) -> list[dict]:
     """Convert a NetworkX DiGraph + positions into Cytoscape elements."""
     elements = []
     max_weight = max((d["weight"] for _, _, d in G.edges(data=True)), default=1)
+    compare_a, compare_b = compare_teams if compare_teams else (None, None)
+
+    # Determine if we should dim non-featured elements
+    has_feature = bool(compare_a and compare_b) or bool(player_teams)
+    featured_nodes = set()
+    if compare_a and compare_b:
+        featured_nodes |= {compare_a, compare_b}
+    if player_teams:
+        featured_nodes |= player_teams
 
     for node in G.nodes():
         x, y = pos[node]
         weighted_deg = G.degree(node, weight="weight")
+        classes = []
+        if node == highlight_team:
+            classes.append("highlighted")
+        elif highlight_team and G.has_node(highlight_team) and (
+            G.has_edge(highlight_team, node) or G.has_edge(node, highlight_team)
+        ):
+            classes.append("neighbor")
+        if node == compare_a:
+            classes.append("compare-a")
+        if node == compare_b:
+            classes.append("compare-b")
+        if player_teams and node in player_teams:
+            classes.append("player-team")
+        if has_feature and not highlight_team and node not in featured_nodes:
+            classes.append("dimmed")
+
         elements.append({
             "data": {
                 "id": node,
                 "label": node,
                 "weighted_degree": weighted_deg,
-                "size": max(30, 20 + weighted_deg / 4),
+                "size": max(45, 30 + weighted_deg / 4),
+                "logo_url": LOGO_URL.format(node),
             },
             "position": {"x": x * 500, "y": y * 500},
-            "classes": (
-                "highlighted" if node == highlight_team
-                else "neighbor" if highlight_team and G.has_node(highlight_team) and (
-                    G.has_edge(highlight_team, node) or G.has_edge(node, highlight_team)
-                )
-                else ""
-            ),
+            "classes": " ".join(classes),
         })
 
     for u, v, data in G.edges(data=True):
         weight = data["weight"]
+        classes = []
+        is_featured_edge = False
+        if highlight_team and highlight_team in (u, v):
+            classes.append("highlighted-edge")
+            is_featured_edge = True
+        if compare_a and compare_b and {u, v} <= {compare_a, compare_b}:
+            classes.append("compare-edge")
+            is_featured_edge = True
+        if player_teams and u in player_teams and v in player_teams:
+            classes.append("player-edge")
+            is_featured_edge = True
+        if has_feature and not highlight_team and not is_featured_edge:
+            classes.append("dimmed")
+
         elements.append({
             "data": {
                 "source": u,
@@ -169,10 +211,7 @@ def graph_to_cytoscape(G: nx.DiGraph, pos: dict, highlight_team: str | None = No
                 "weight": weight,
                 "norm_weight": max(1, weight * 8 / max_weight),
             },
-            "classes": (
-                "highlighted-edge" if highlight_team and highlight_team in (u, v)
-                else ""
-            ),
+            "classes": " ".join(classes),
         })
 
     return elements
@@ -190,32 +229,71 @@ CYTO_STYLESHEET = [
             "label": "data(label)",
             "width": "data(size)",
             "height": "data(size)",
-            "background-color": "#3498db",
+            "background-image": "data(logo_url)",
+            "background-fit": "contain",
+            "background-color": "#1a1a2e",
             "color": "#ffffff",
-            "text-valign": "center",
+            "text-valign": "bottom",
             "text-halign": "center",
-            "font-size": "10px",
+            "font-size": "8px",
             "font-weight": "bold",
             "border-width": 2,
-            "border-color": "#ffffff",
+            "border-color": "#3498db",
+            "text-margin-y": 5,
             "text-outline-width": 2,
-            "text-outline-color": "#1a1a2e",
+            "text-outline-color": "#0e1117",
         },
     },
-    # Highlighted node
+    # Highlighted node (click or dropdown)
     {
         "selector": "node.highlighted",
         "style": {
-            "background-color": "#e67e22",
-            "border-color": "#ffffff",
-            "border-width": 3,
+            "border-color": "#e67e22",
+            "border-width": 4,
         },
     },
     # Neighbor of highlighted node
     {
         "selector": "node.neighbor",
         "style": {
-            "background-color": "#3498db",
+            "border-color": "#3498db",
+        },
+    },
+    # Dimmed node (when comparison or player career is active)
+    {
+        "selector": "node.dimmed",
+        "style": {
+            "opacity": 0.15,
+        },
+    },
+    # Compare team A
+    {
+        "selector": "node.compare-a",
+        "style": {
+            "border-color": "#e74c3c",
+            "border-width": 5,
+            "opacity": 1,
+            "z-index": 10,
+        },
+    },
+    # Compare team B
+    {
+        "selector": "node.compare-b",
+        "style": {
+            "border-color": "#9b59b6",
+            "border-width": 5,
+            "opacity": 1,
+            "z-index": 10,
+        },
+    },
+    # Player career team
+    {
+        "selector": "node.player-team",
+        "style": {
+            "border-color": "#2ecc71",
+            "border-width": 5,
+            "opacity": 1,
+            "z-index": 10,
         },
     },
     # Default edge
@@ -231,6 +309,13 @@ CYTO_STYLESHEET = [
             "opacity": 0.6,
         },
     },
+    # Dimmed edge (when comparison or player career is active)
+    {
+        "selector": "edge.dimmed",
+        "style": {
+            "opacity": 0.07,
+        },
+    },
     # Highlighted edge
     {
         "selector": "edge.highlighted-edge",
@@ -238,6 +323,28 @@ CYTO_STYLESHEET = [
             "line-color": "#e67e22",
             "target-arrow-color": "#e67e22",
             "opacity": 0.9,
+        },
+    },
+    # Comparison edge
+    {
+        "selector": "edge.compare-edge",
+        "style": {
+            "line-color": "#e74c3c",
+            "target-arrow-color": "#e74c3c",
+            "opacity": 1,
+            "z-index": 10,
+            "width": "mapData(norm_weight, 1, 8, 3, 10)",
+        },
+    },
+    # Player career edge
+    {
+        "selector": "edge.player-edge",
+        "style": {
+            "line-color": "#2ecc71",
+            "target-arrow-color": "#2ecc71",
+            "opacity": 1,
+            "z-index": 10,
+            "width": 4,
         },
     },
 ]
@@ -343,6 +450,7 @@ main_content = html.Div([
         boxSelectionEnabled=False,
     ),
     html.Div(id="metrics-row", className="mt-3"),
+    html.Div(id="team-roster-panel", className="mt-3"),
     html.Div(id="career-panel", className="mt-3"),
     html.Div(id="comparison-panel", className="mt-3"),
     html.Div([
@@ -361,7 +469,7 @@ app.layout = dbc.Container(
         html.H2("NHL Team Network", className="mt-3 mb-1"),
         html.P(
             "Nodes = teams. Arrows point from a player's former team to their current team. "
-            "Edge weight = number of active players.",
+            "Edge weight = number of active players. Click a node to highlight it.",
             className="text-muted mb-3",
         ),
         dbc.Row([
@@ -378,6 +486,18 @@ app.layout = dbc.Container(
 # ---------------------------------------------------------------------------
 
 @callback(
+    Output("highlight-team", "value"),
+    Input("team-graph", "tapNodeData"),
+    prevent_initial_call=True,
+)
+def on_node_click(tap_data):
+    """Clicking a node sets the highlight team dropdown."""
+    if tap_data:
+        return tap_data["id"]
+    return no_update
+
+
+@callback(
     Output("team-graph", "elements"),
     Output("metrics-row", "children"),
     Output("top-connections-table", "data"),
@@ -385,8 +505,11 @@ app.layout = dbc.Container(
     Input("layout-selector", "value"),
     Input("min-games-slider", "value"),
     Input("highlight-team", "value"),
+    Input("compare-a", "value"),
+    Input("compare-b", "value"),
+    Input("player-select", "value"),
 )
-def update_graph(layout_name, min_games, highlight_team):
+def update_graph(layout_name, min_games, highlight_team, compare_a, compare_b, player_select):
     min_shared = 1
     # Recompute edges if min_games filter is active
     if min_games and min_games > 0 and HAS_GP:
@@ -408,8 +531,19 @@ def update_graph(layout_name, min_games, highlight_team):
         G = G.subgraph(keep).copy()
         G.remove_edges_from([(u, v) for u, v in G.edges() if highlight_team not in (u, v)])
 
+    # Determine player's teams for highlighting
+    player_teams = None
+    if player_select:
+        player_rows = PTS_DF[PTS_DF["player_id"] == player_select]
+        player_teams = set(player_rows["team"].unique()) & set(G.nodes)
+
+    # Comparison teams
+    compare_teams = None
+    if compare_a and compare_b and compare_a != compare_b:
+        compare_teams = (compare_a, compare_b)
+
     pos = LAYOUTS[layout_name](G)
-    elements = graph_to_cytoscape(G, pos, highlight_team)
+    elements = graph_to_cytoscape(G, pos, highlight_team, compare_teams, player_teams)
 
     # Metrics
     metrics = dbc.Row([
@@ -458,37 +592,64 @@ def update_player_search(search_text):
 @callback(
     Output("career-panel", "children"),
     Input("player-select", "value"),
-    Input("team-graph", "tapNodeData"),
 )
-def update_career_panel(selected_player_id, tap_data):
-    # If a player is selected via search, show their career
-    if selected_player_id:
-        player_rows = PTS_DF[PTS_DF["player_id"] == selected_player_id]
-        if player_rows.empty:
-            return []
-        player_name = player_rows["full_name"].iloc[0]
-        career = (
-            player_rows.sort_values("season")[["season", "team", "games_played"]]
-            .copy()
-        )
-        career["season"] = career["season"].str[:4]
-        cols = [
-            {"name": "Season", "id": "season"},
-            {"name": "Team", "id": "team"},
-        ]
-        if HAS_GP and not career["games_played"].eq(0).all():
-            cols.append({"name": "GP", "id": "games_played"})
+def update_career_panel(selected_player_id):
+    if not selected_player_id:
+        return []
+    player_rows = PTS_DF[PTS_DF["player_id"] == selected_player_id]
+    if player_rows.empty:
+        return []
+    player_name = player_rows["full_name"].iloc[0]
+    career = (
+        player_rows.sort_values("season")[["season", "team", "games_played"]]
+        .copy()
+    )
+    career["season"] = career["season"].str[:4]
+    cols = [
+        {"name": "Season", "id": "season"},
+        {"name": "Team", "id": "team"},
+    ]
+    if HAS_GP and not career["games_played"].eq(0).all():
+        cols.append({"name": "GP", "id": "games_played"})
 
-        return [
-            html.H5(f"Career path -- {player_name}"),
-            dash_table.DataTable(
-                data=career.to_dict("records"),
-                columns=cols,
-                style_header={"backgroundColor": "#1a1a2e", "color": "white", "fontWeight": "bold"},
-                style_cell={"backgroundColor": "#0e1117", "color": "white", "border": "1px solid #333"},
-            ),
-        ]
-    return []
+    return [
+        html.H5(f"Career path -- {player_name}"),
+        dash_table.DataTable(
+            data=career.to_dict("records"),
+            columns=cols,
+            style_header={"backgroundColor": "#1a1a2e", "color": "white", "fontWeight": "bold"},
+            style_cell={"backgroundColor": "#0e1117", "color": "white", "border": "1px solid #333"},
+        ),
+    ]
+
+
+@callback(
+    Output("team-roster-panel", "children"),
+    Input("highlight-team", "value"),
+)
+def update_team_roster(highlight_team):
+    """Show roster of players currently on the highlighted team."""
+    if not highlight_team:
+        return []
+    roster = PTS_DF[
+        (PTS_DF["current_team"] == highlight_team)
+    ].drop_duplicates("player_id")[["full_name", "position"]].sort_values("full_name")
+    if roster.empty:
+        return []
+    cols = [
+        {"name": "Player", "id": "full_name"},
+        {"name": "Pos", "id": "position"},
+    ]
+    return [
+        html.H5(f"Current roster -- {highlight_team}"),
+        dash_table.DataTable(
+            data=roster.to_dict("records"),
+            columns=cols,
+            sort_action="native",
+            style_header={"backgroundColor": "#1a1a2e", "color": "white", "fontWeight": "bold"},
+            style_cell={"backgroundColor": "#0e1117", "color": "white", "border": "1px solid #333"},
+        ),
+    ]
 
 
 @callback(
