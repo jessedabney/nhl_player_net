@@ -198,7 +198,7 @@ def build_team_edges(pts: pd.DataFrame) -> pd.DataFrame:
     for player_id, current in current_team_lookup.items():
         historical = player_all_teams.get(player_id, set()) - {current}
         for h in historical:
-            key = tuple(sorted([current, h]))
+            key = (h, current)  # directed: former team → current team
             pair_counts.setdefault(key, set()).add(player_id)
 
     multi_team_players = sum(1 for pid, ct in current_team_lookup.items()
@@ -207,14 +207,14 @@ def build_team_edges(pts: pd.DataFrame) -> pd.DataFrame:
 
     rows = [
         {
-            "team_a": t1,
-            "team_b": t2,
+            "from_team": src,
+            "to_team": dst,
             "shared_players": len(pids),
             "shared_player_names": "|".join(
                 sorted(name_lookup.get(pid, str(pid)) for pid in pids)
             ),
         }
-        for (t1, t2), pids in pair_counts.items()
+        for (src, dst), pids in pair_counts.items()
     ]
     edges = pd.DataFrame(rows).sort_values("shared_players", ascending=False).reset_index(drop=True)
     return edges
