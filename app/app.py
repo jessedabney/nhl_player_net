@@ -26,7 +26,7 @@ PTS_PATH = Path(__file__).parent.parent / "data" / "processed" / "player_team_se
 @st.cache_data
 def load_data():
     edges = pd.read_csv(EDGES_PATH)
-    pts = pd.read_csv(PTS_PATH)
+    pts = pd.read_csv(PTS_PATH, dtype={"season": str})
     return edges, pts
 
 
@@ -66,8 +66,16 @@ def build_graph(edges: pd.DataFrame, min_shared: int) -> nx.Graph:
     return G
 
 
-def spring_layout(G: nx.Graph) -> dict:
-    return nx.spring_layout(G, seed=42, weight="weight")
+LAYOUTS = {
+    "Spectral":       lambda G: nx.spectral_layout(G, weight="weight"),
+    "Spring":         lambda G: nx.spring_layout(G, seed=42, weight="weight", k=3, iterations=100),
+    "Circular":       lambda G: nx.circular_layout(G),
+    "Kamada-Kawai":   lambda G: nx.kamada_kawai_layout(G, weight="weight"),
+    "Shell":          lambda G: nx.shell_layout(G),
+}
+
+def get_layout(G: nx.Graph, name: str) -> dict:
+    return LAYOUTS[name](G)
 
 
 # ---------------------------------------------------------------------------
@@ -101,13 +109,13 @@ def build_figure(
 
         if is_player_edge:
             color = "rgba(50,205,50,0.8)"
-            width = max(1.5, weight / 10)
+            width = max(7.5, weight / 2)
         elif is_highlight_edge:
             color = "rgba(255,100,0,0.7)"
-            width = max(1.0, weight / 12)
+            width = max(5.0, weight * 5 / 12)
         else:
             color = "rgba(200,200,200,0.25)"
-            width = max(0.5, weight / 15)
+            width = max(2.5, weight / 3)
 
         edge_traces.append(
             go.Scatter(
@@ -152,7 +160,7 @@ def build_figure(
             f"<b>{node}</b><br>Connected to {team_count} teams<br>{weighted_degree} total shared players"
             f"<br><br>Top connections:<br>{top_neighbors}"
         )
-        node_size.append(12 + weighted_degree / 18)
+        node_size.append(50 + weighted_degree / 8)
 
         if node in player_teams:
             node_color.append("#2ecc71")       # green — player's team
@@ -172,7 +180,8 @@ def build_figure(
         marker=dict(
             size=node_size,
             color=node_color,
-            line=dict(width=1, color="white"),
+            opacity=1.0,
+            line=dict(width=2, color="white"),
         ),
     )
 
@@ -184,7 +193,7 @@ def build_figure(
             margin=dict(b=0, l=0, r=0, t=0),
             xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
             yaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-            height=700,
+            height=1000,
             paper_bgcolor="#0e1117",
             plot_bgcolor="#0e1117",
             font=dict(color="white"),
@@ -216,6 +225,9 @@ def main():
 
     # ---- Sidebar ----
     st.sidebar.header("Filters")
+
+    # Layout selector
+    layout_name = st.sidebar.selectbox("Layout", options=list(LAYOUTS.keys()), index=0)
 
     # Games played filter
     if has_gp:
@@ -301,7 +313,7 @@ def main():
         st.warning("No edges meet the current filter — try lowering the minimum shared players.")
         return
 
-    pos = spring_layout(G)
+    pos = get_layout(G, layout_name)
     fig = build_figure(G, pos, highlight_team, player_teams & set(G.nodes), edges)
     st.plotly_chart(fig, use_container_width=True)
 
@@ -320,7 +332,7 @@ def main():
             .sort_values("season")[["season", "team", "games_played"]]
             .rename(columns={"season": "Season", "team": "Team", "games_played": "GP"})
         )
-        career["Season"] = career["Season"].str[:4]
+        career["Season"] = career["Season"].astype(str).str[:4]
         if not has_gp or career["GP"].eq(0).all():
             career = career.drop(columns=["GP"])
         st.dataframe(career, use_container_width=True, hide_index=True)
@@ -342,8 +354,8 @@ def main():
                 b_rows = pts[(pts["player_id"] == pid) & (pts["team"] == compare_b)]
                 name = a_rows["full_name"].iloc[0]
                 position = a_rows["position"].iloc[0]
-                a_seasons = ", ".join(sorted(a_rows["season"].astype(str).str[:4]))
-                b_seasons = ", ".join(sorted(b_rows["season"].astype(str).str[:4]))
+                a_seasons = ", ".join(sorted(a_rows["season"].str[:4]))
+                b_seasons = ", ".join(sorted(b_rows["season"].str[:4]))
                 a_gp = int(a_rows["games_played"].sum()) if has_gp else None
                 b_gp = int(b_rows["games_played"].sum()) if has_gp else None
                 current_team = a_rows["current_team"].iloc[0] if "current_team" in a_rows.columns else None
