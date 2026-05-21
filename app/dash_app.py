@@ -39,8 +39,6 @@ MAX_GP = int(PTS_DF["games_played"].max()) if HAS_GP else 0
 # Team city coordinates (lat, lon)
 TEAM_COORDS = {
     "ANA": (33.81, -117.88),   # Anaheim
-    "ARI": (33.53, -112.07),   # Glendale/Tempe (historical)
-    "ATL": (33.76, -84.39),    # Atlanta (historical)
     "BOS": (42.37, -71.06),    # Boston
     "BUF": (42.87, -78.88),    # Buffalo
     "CAR": (35.80, -78.72),    # Raleigh
@@ -61,7 +59,6 @@ TEAM_COORDS = {
     "NYR": (40.75, -73.99),    # Manhattan (MSG)
     "OTT": (45.30, -75.93),    # Ottawa
     "PHI": (39.90, -75.17),    # Philadelphia
-    "PHX": (33.45, -112.07),   # Phoenix (historical)
     "PIT": (40.44, -80.00),    # Pittsburgh
     "SEA": (47.62, -122.35),   # Seattle
     "SJS": (37.33, -121.90),   # San Jose
