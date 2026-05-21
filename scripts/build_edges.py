@@ -22,6 +22,13 @@ RAW_DIR = Path(__file__).parent.parent / "data" / "raw"
 PROCESSED_DIR = Path(__file__).parent.parent / "data" / "processed"
 ACTIVE_SEASON = "20252026"
 
+# Collapsed franchise mappings: old abbreviation -> current abbreviation
+FRANCHISE_REMAP = {
+    "PHX": "UTA",
+    "ARI": "UTA",
+    "ATL": "WPG",
+}
+
 
 # ---------------------------------------------------------------------------
 # Parse raw JSON
@@ -84,10 +91,12 @@ def build_player_team_seasons(active_only: bool = False) -> pd.DataFrame:
     df = pd.DataFrame(all_records)
     df = df.dropna(subset=["player_id"])
     df["player_id"] = df["player_id"].astype(int)
+    df["team"] = df["team"].replace(FRANCHISE_REMAP)
     df = df.drop_duplicates(subset=["player_id", "team", "season"])
 
     if active_only:
         active_map = get_active_player_map()
+        active_map = {pid: FRANCHISE_REMAP.get(team, team) for pid, team in active_map.items()}
         before = len(df)
         df = df[df["player_id"].isin(active_map)]
         df["current_team"] = df["player_id"].map(active_map)
