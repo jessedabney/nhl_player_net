@@ -22,6 +22,14 @@ PTS_PATH = Path(__file__).parent.parent / "data" / "processed" / "player_team_se
 
 LOGO_URL = "/assets/logos/{}.svg"
 
+TABLE_STYLE = dict(
+    style_header={"backgroundColor": "#1a1a2e", "color": "white", "fontWeight": "bold",
+                  "padding": "3px 8px", "fontSize": "12px"},
+    style_cell={"backgroundColor": "#0e1117", "color": "white", "border": "1px solid #333",
+                "padding": "2px 8px", "fontSize": "12px", "lineHeight": "1.2"},
+    style_data={"height": "24px", "minHeight": "24px", "maxHeight": "24px"},
+)
+
 # ---------------------------------------------------------------------------
 # Data loading
 # ---------------------------------------------------------------------------
@@ -181,8 +189,7 @@ def graph_to_cytoscape(
                 "id": node,
                 "label": node,
                 "weighted_degree": weighted_deg,
-                "size": max(45, 30 + weighted_deg / 4),
-                "logo_url": LOGO_URL.format(node),
+                "size": max(40, 25 + weighted_deg / 4),
             },
             "position": {"x": x * 500, "y": y * 500},
             "classes": " ".join(classes),
@@ -229,17 +236,14 @@ CYTO_STYLESHEET = [
             "label": "data(label)",
             "width": "data(size)",
             "height": "data(size)",
-            "background-image": "data(logo_url)",
-            "background-fit": "contain",
             "background-color": "#1a1a2e",
             "color": "#ffffff",
-            "text-valign": "bottom",
+            "text-valign": "center",
             "text-halign": "center",
-            "font-size": "8px",
+            "font-size": "9px",
             "font-weight": "bold",
             "border-width": 2,
             "border-color": "#3498db",
-            "text-margin-y": 5,
             "text-outline-width": 2,
             "text-outline-color": "#0e1117",
         },
@@ -450,17 +454,27 @@ main_content = html.Div([
         boxSelectionEnabled=False,
     ),
     html.Div(id="metrics-row", className="mt-3"),
-    html.Div(id="team-roster-panel", className="mt-3"),
+    dbc.Row(dbc.Col(html.Div(id="team-roster-panel"), width=4), className="mt-3"),
     html.Div(id="career-panel", className="mt-3"),
     html.Div(id="comparison-panel", className="mt-3"),
-    html.Div([
-        html.H5("Top team connections"),
-        dash_table.DataTable(
-            id="top-connections-table",
-            style_header={"backgroundColor": "#1a1a2e", "color": "white", "fontWeight": "bold"},
-            style_cell={"backgroundColor": "#0e1117", "color": "white", "border": "1px solid #333"},
-            page_size=20,
-        ),
+    dbc.Row([
+        dbc.Col([
+            html.H5("Top connections", className="mb-1"),
+            dash_table.DataTable(
+                id="top-connections-table",
+                **TABLE_STYLE,
+                page_size=20,
+            ),
+        ], width=8),
+        dbc.Col([
+            html.H5("Team degrees", className="mb-1"),
+            dash_table.DataTable(
+                id="team-degree-table",
+                **TABLE_STYLE,
+                sort_action="native",
+                page_size=32,
+            ),
+        ], width=4),
     ], className="mt-3"),
 ])
 
@@ -502,6 +516,8 @@ def on_node_click(tap_data):
     Output("metrics-row", "children"),
     Output("top-connections-table", "data"),
     Output("top-connections-table", "columns"),
+    Output("team-degree-table", "data"),
+    Output("team-degree-table", "columns"),
     Input("layout-selector", "value"),
     Input("min-games-slider", "value"),
     Input("highlight-team", "value"),
@@ -519,11 +535,11 @@ def update_graph(layout_name, min_games, highlight_team, compare_a, compare_b, p
         edges = EDGES_DF
 
     if edges.empty:
-        return [], html.P("No edges with current filters."), [], []
+        return [], html.P("No edges with current filters."), [], [], [], []
 
     G = build_graph(edges, min_shared)
     if len(G.nodes) == 0:
-        return [], html.P("No edges meet the current filter."), [], []
+        return [], html.P("No edges meet the current filter."), [], [], [], []
 
     # Filter to highlight team neighborhood
     if highlight_team and highlight_team in G:
@@ -545,15 +561,22 @@ def update_graph(layout_name, min_games, highlight_team, compare_a, compare_b, p
     pos = LAYOUTS[layout_name](G)
     elements = graph_to_cytoscape(G, pos, highlight_team, compare_teams, player_teams)
 
-    # Metrics
+    # Metrics (C6: active players instead of connections count)
+    if min_games and min_games > 0 and HAS_GP:
+        pts_for_count = PTS_DF[PTS_DF["games_played"] >= min_games]
+    else:
+        pts_for_count = PTS_DF
+    active_players = pts_for_count["current_team"].notna()
+    active_count = pts_for_count[active_players]["player_id"].nunique()
+
     metrics = dbc.Row([
         dbc.Col(dbc.Card([
             html.H4(len(G.nodes), className="text-center"),
             html.P("Teams shown", className="text-center text-muted mb-0"),
         ], body=True, className="bg-dark"), width=6),
         dbc.Col(dbc.Card([
-            html.H4(len(G.edges), className="text-center"),
-            html.P("Connections shown", className="text-center text-muted mb-0"),
+            html.H4(active_count, className="text-center"),
+            html.P("Active players", className="text-center text-muted mb-0"),
         ], body=True, className="bg-dark"), width=6),
     ])
 
@@ -563,10 +586,17 @@ def update_graph(layout_name, min_games, highlight_team, compare_a, compare_b, p
     table_cols = [
         {"name": "From", "id": "from_team"},
         {"name": "To (current)", "id": "to_team"},
-        {"name": "Shared Players", "id": "shared_players"},
+        {"name": "Shared", "id": "shared_players"},
     ]
 
-    return elements, metrics, table_data, table_cols
+    # Team degree table (C7)
+    degree_rows = sorted(
+        [{"Team": n, "Connections": G.degree(n)} for n in G.nodes()],
+        key=lambda r: r["Connections"], reverse=True,
+    )
+    degree_cols = [{"name": "Team", "id": "Team"}, {"name": "Connections", "id": "Connections"}]
+
+    return elements, metrics, table_data, table_cols, degree_rows, degree_cols
 
 
 @callback(
@@ -617,8 +647,7 @@ def update_career_panel(selected_player_id):
         dash_table.DataTable(
             data=career.to_dict("records"),
             columns=cols,
-            style_header={"backgroundColor": "#1a1a2e", "color": "white", "fontWeight": "bold"},
-            style_cell={"backgroundColor": "#0e1117", "color": "white", "border": "1px solid #333"},
+            **TABLE_STYLE,
         ),
     ]
 
@@ -646,8 +675,7 @@ def update_team_roster(highlight_team):
             data=roster.to_dict("records"),
             columns=cols,
             sort_action="native",
-            style_header={"backgroundColor": "#1a1a2e", "color": "white", "fontWeight": "bold"},
-            style_cell={"backgroundColor": "#0e1117", "color": "white", "border": "1px solid #333"},
+            **TABLE_STYLE,
         ),
     ]
 
@@ -698,8 +726,7 @@ def update_comparison(compare_a, compare_b):
             data=comparison_df.to_dict("records"),
             columns=cols,
             sort_action="native",
-            style_header={"backgroundColor": "#1a1a2e", "color": "white", "fontWeight": "bold"},
-            style_cell={"backgroundColor": "#0e1117", "color": "white", "border": "1px solid #333"},
+            **TABLE_STYLE,
         ),
     ]
 
